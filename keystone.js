@@ -6,7 +6,7 @@ require('dotenv').load();
 var keystone = require('keystone'),
 	cons = require('consolidate'),
 	nunjucks = require('nunjucks');
-	
+
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
@@ -24,9 +24,9 @@ keystone.init({
 	'views': 'templates/views',
 	'view engine': 'html',
 	'custom engine': cons.nunjucks,
-	
+
 	'emails': 'templates/emails',
-	
+
 	'auto update': true,
 	'session': true,
 	'auth': true,
