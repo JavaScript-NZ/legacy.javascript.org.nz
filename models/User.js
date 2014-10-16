@@ -13,8 +13,12 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 	groups: { type: Types.Relationship, ref: 'UserGroup', many: true },
-	registeredOn: { type: Types.Date, default: Date.now, noedit: true },
+	registeredOn: { type: Types.Date, default: Date.now, noedit: true }
+}, 'Membership', {
+	membershipType: { type: Types.Select, options: 'unpaid, student, regular', required: true, emptyOption: false, default: 'unpaid' },
 	paidUntil: { type: Types.Date },
+}, 'Profile', {
+	visibility: { type: Types.Select, options: [{value: 0, label: 'Committee only'}, {value: 1, label: 'Members only'}, {value: 2, label: 'Public'}], required: true, emptyOption: false, default: 0, initial: true },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
 });
