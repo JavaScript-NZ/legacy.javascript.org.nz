@@ -1,0 +1,18 @@
+{
+  "name": "javascript.org.nz",
+  "version": "1.0.0",
+  "description": "JavaScript NZ Society website",
+  "main": "keystone.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JavaScript-NZ/javascript.org.nz.git"
+  },
+  "author": "JavaScript NZ Incorporated",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JavaScript-NZ/javascript.org.nz/issues"
+  },
+  "homepage": "https://javascript.org.nz/",
+  "dependencies": {
+  }
+}
