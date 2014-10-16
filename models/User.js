@@ -13,7 +13,7 @@ User.add({
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 	groups: { type: Types.Relationship, ref: 'UserGroup', many: true },
-	registeredOn: { type: Types.Date, default: Date.now },
+	registeredOn: { type: Types.Date, default: Date.now, noedit: true },
 	paidUntil: { type: Types.Date },
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
