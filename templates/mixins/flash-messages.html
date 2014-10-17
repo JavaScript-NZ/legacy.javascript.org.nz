@@ -11,14 +11,14 @@
 				{{ flashMessage(message, "warning") }}
 			{% endfor %}
 			{% for message in messages.error %}
-				{{ flashMessage(message, "danger") }}
+				{{ flashMessage(message, "error") }}
 			{% endfor %}
 		</div>
 	{% endif %}
 {% endmacro %}
 
 {% macro flashMessage(message, type) %}
-	<div class="alert alert-{{ type }}">
+	<div class="ui message {{ type }}">
 		{% if message %}
 			{% if message.title %}
 				<h5>{{ message.title }}</h5>

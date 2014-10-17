@@ -15,6 +15,9 @@
 		<script src="//use.typekit.net/gmn8ehf.js"></script>
 		<script>try{Typekit.load();}catch(e){}</script>
 
+		<script src="/js/lib/jquery/jquery-2.1.1.min.js"></script>
+		<script src="/semantic-ui/definitions/javascript/semantic.min.js"></script>
+
 		{# This file provides the default styling for the KeystoneJS Content Editor #}
 		{% if user and user.canAccessKeystone %}
 			<link href="/keystone/styles/content/editor.min.css" rel="stylesheet">
@@ -27,11 +30,11 @@
 		{% block head %}{% endblock %}
 	</head>
 	<body class="menu">
-		<nav role="navigation" id="nav" class="ui fixed menu small link green inverted">
+		<nav role="navigation" id="nav" class="ui fixed menu link green inverted">
 			<div class="left menu">
-				<div class="title item">
-					<a href="/">JavaScript NZ</a>
-				</div>
+				<a href="/" class="item" style="padding: 0; margin: 0;">
+					<img src="/images/logo-48.png">
+				</a>
 				{% for link in navLinks %}
 					<div class="{{ 'active' if link.key == section else '' }} item">
 						<a href="{{ link.href }}">{{ link.label }}</a>
@@ -69,7 +72,7 @@
 				{% endif %}
 			</div>
 		</nav>
-		
+
 		<header class="hero tk-lobster">
 			<div class="hero-brand">
 				<span class="hero-prefix">JavaScript</span>
@@ -82,7 +85,7 @@
 		</header>
 
 		{# BODY #}
-		<div id="body" class="content">
+		<div id="body" class="page">
 			{# NOTE:
 			   There is no .container wrapping class around body blocks to allow more flexibility in design.
 			   Remember to include it in your templates when you override the intro and content blocks! #}
@@ -90,9 +93,12 @@
 			{# The Intro block appears above flash messages (used for temporary information display) #}
 			{% block intro %}{% endblock %}
 
-			{# Flash messages allow you to display once-off status messages to users, e.g. form
-			   validation errors, success messages, etc. #}
-			{{ FM.flashMessages(messages) }}
+
+			{% if messages %}
+					{# Flash messages allow you to display once-off status messages to users, e.g. form
+			   		 validation errors, success messages, etc. #}
+				  {{ FM.flashMessages(messages) }}
+			{% endif %}
 
 			{# The content block should contain the body of your template"s content #}
 			{% block content %}{% endblock %}
@@ -100,18 +106,8 @@
 
 
 		{# FOOTER #}
-		<footer id="footer" class="container">
-			{# You don"t _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it! #}
-			<p>Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.</p>
+		<footer id="footer" class="footer">
 		</footer>
-
-
-		{# JAVASCRIPT #}
-
-		{# jQuery 1.11.1 is included by default, and required by both Bootstrap
-			and the KeystoneJS Content Editor. If you are not targeting IE8,
-			you can upgrade to 2.1.1 (also bundled) for better performance. #}
-		<script src="/js/lib/jquery/jquery-2.1.1.min.js"></script>
 
 		{# The KeystoneJS Content Editor provides support for ks-editable data attributes,
 			which generate links to edit content for users who can access Keystone #}
