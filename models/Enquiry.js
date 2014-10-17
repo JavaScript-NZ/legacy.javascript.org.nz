@@ -16,10 +16,11 @@ Enquiry.add({
 	email: { type: Types.Email, required: true },
 	phone: { type: String },
 	enquiryType: { type: Types.Select, options: [
-		{ value: 'message', label: "Just leaving a message" },
-		{ value: 'question', label: "I've got a question" },
-		{ value: 'other', label: "Something else..." }
-	] },
+		{ value: 'committee', label: "General enquiry for the Committee", default: true },
+		{ value: 'treasurer', label: "Question for the Treasurer" },
+		{ value: 'secretary', label: "Question for the Secretary" },
+		{ value: 'president', label: "Question for the President" }
+	], required: true },
 	message: { type: Types.Markdown, required: true },
 	createdAt: { type: Date, default: Date.now }
 });
@@ -36,25 +37,29 @@ Enquiry.schema.post('save', function() {
 });
 
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
-	
+
 	var enqiury = this;
-	
-	keystone.list('User').model.find().where('isAdmin', true).exec(function(err, admins) {
-		
+
+	var recipientQuery = keystone.list('User').model.find();
+	if (this.enquiryType == 'committee')
+		recipientQuery = recipientQuery.where('committeeRole').ne('');
+	else
+		recipientQuery = recipientQuery.where('committeeRole', this.enquiryType);
+
+	recipientQuery.exec(function(err, recipients) {
 		if (err) return callback(err);
-		
+
 		new keystone.Email('enquiry-notification').send({
-			to: admins,
+			to: recipients,
 			from: {
 				name: 'JavaScript NZ',
-				email: 'contact@javascript-nz.com'
+				email: 'contact@javascript.org.nz'
 			},
-			subject: 'New Enquiry for JavaScript NZ',
+			subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
 			enquiry: enqiury
 		}, callback);
-		
+
 	});
-	
 }
 
 Enquiry.defaultSort = '-createdAt';
