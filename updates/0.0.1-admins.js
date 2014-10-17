@@ -6,7 +6,7 @@
 
 exports.create = {
 	User: [
-		{ 'name.first': 'Admin', 'name.last': 'User', email: 'blair@theunfocused.net', password: 'admin', isAdmin: true }
+		{ 'name.first': 'Admin', 'name.last': 'User', email: 'admin@javascript.org.nz', password: 'admin', isAdmin: true, committeeRole: 'officer' }
 	]
 };
 
