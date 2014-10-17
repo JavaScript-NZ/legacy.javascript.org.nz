@@ -1,0 +1,72 @@
+{% extends "templates/layouts/default.html" %}
+
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="users icon"></i>
+			<div class="content">Become a Member</div>
+		</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="main container">
+		<p>In order to help pursure our goals of supporting and promoting JavaScript across New Zealand, we ask that a small membership fee be paid yearly.</p>
+		<p>We have a reduced membership fee for students.</p>
+		<p>We do not wish a membership fee to exclude anyone; if paying the membership fee would be unduely difficult for you, please <a href="/contact">contact the JavaScript NZ Committee</a>.</p>
+
+		<form method="post" class="ui form segment">
+			<input type="hidden" name="action" value="join">
+
+			{% set class = ( "error" if validationErrors.name else "" ) %}
+			<div class="required field {{ class }}">
+				<label for="joinName">Name</label>
+				<input id="joinName" type="text" name="name.full" value="{{ formData["name.full"] }}">
+			</div>
+
+			{% set class = ( "error" if validationErrors.email else "" ) %}
+			<div class="required field {{ class }}">
+					<label for="joinEmail">Email</label>
+					<input id="joinEmail" type="email" name="email" value="{{ formData["email"] }}">
+			</div>
+
+			{% set class = ( "error" if validationErrors.password else "" ) %}
+			<div class="required field {{ class }}">
+				<label for="joinPassword">Password</label>
+				<input id="joinPassword" type="password" name="password" value="{{ formData["password"] }}">
+			</div>
+
+			<div class="field">
+				<label>Membership type</label>
+				<select id="joinMembershipType" name="membershipType" class="ui dropdown">
+					<option value="regular">Regular membership ($25/year)</option>
+					<option value="student">Student membership ($10/year)</option>
+				</select>
+			</div>
+
+			{% set class = ( "error" if validationErrors.agreeRules else "" ) %}
+			<div class="required field {{ class }}">
+				<div class="ui toggle checkbox">
+					<input id="joinRules" type="checkbox" name="agreeRules" value="{{ formData["agreeRules"] }}">
+					<label>I agree to the <a href="/rules">JavaScript NZ Rules</a></label>
+				</div>
+			</div>
+
+			{% set class = ( "error" if validationErrors.agreeConduct else "" ) %}
+			<div class="required field {{ class }}">
+				<div class="ui toggle checkbox">
+					<input id="joinConduct" type="checkbox" name="agreeConduct" value="{{ formData["agreeConduct"] }}">
+					<label>I agree to the <a href="/conduct">JavaScript NZ Code of Conduct</a></label>
+				</div>
+			</div>
+
+			<div class="ui center aligned">
+				<button class="ui green button" type="submit">Become a Member</button>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script>$('.ui.dropdown').dropdown(); $('.ui.checkbox').checkbox();</script>
+{% endblock %}
