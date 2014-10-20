@@ -1,4 +1,8 @@
-javascript.org.nz
-=================
+# javascript.org.nz
 
-Society website
+## Development
+
+This is built using [KeystoneJS](http://keystonejs.com/).
+
+To get this running, you at least need a MongoDB instance running.
+
