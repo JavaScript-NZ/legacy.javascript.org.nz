@@ -7,14 +7,12 @@ var keystone = require('keystone'),
 	cons = require('consolidate'),
 	nunjucks = require('nunjucks');
 
-
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
 
 keystone.init({
-
 	'name': 'JavaScript NZ',
 	'brand': 'JavaScript NZ',
 
@@ -27,12 +25,16 @@ keystone.init({
 
 	'emails': 'templates/emails',
 
+	'404': 'errors/404',
+	'500': 'errors/500',
+
 	'auto update': true,
 	'session': true,
 	'auth': true,
 	'user model': 'User',
-	'cookie secret': 'x`PkSgeo4Z6Q<X_!$|T;+:zNZc*Q"B+}pw9,5=Rd3Iak+oS{uV`~I~oxTtK5C,}T'
+	'cookie secret': 'x`PkSgeo4Z6Q<X_!$|T;+:zNZc*Q"B+}pw9,5=Rd3Iak+oS{uV`~I~oxTtK5C,}T',
 
+	'basedir': __dirname
 });
 
 // Load your project's Models

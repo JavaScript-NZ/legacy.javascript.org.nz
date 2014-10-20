@@ -1,8 +1,23 @@
 {% extends "templates/layouts/default.html" %}
 
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="help circle icon"></i>
+			<div class="content">Not found</div>
+		</h1>
+	</div>
+{% endblock %}
+
 {% block content %}
 	<div class="container">
-		<h1>404</h1>
-		<p class="lead">Sorry, the page you requested can"t be found.</p>
+		<div class="ui segment center aligned">
+			<p>Sorry, the page you requested can't be found.</p>
+			<div class="ui buttons">
+				<a href="javascript:history.back();" class="ui button">Go back</a>
+				<div class="or"></div>
+				<a href="/" class="ui positive button">Go home</a>
+			</div>
+		</div>
 	</div>
 {% endblock %}

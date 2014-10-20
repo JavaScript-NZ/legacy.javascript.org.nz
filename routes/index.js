@@ -25,6 +25,7 @@ var _ = require('underscore'),
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
+keystone.pre('routes', middleware.initErrorHandlers);
 keystone.pre('render', middleware.flashMessages);
 
 // Import Route Controllers

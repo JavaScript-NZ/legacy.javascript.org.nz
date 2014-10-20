@@ -1,8 +1,32 @@
 {% extends "templates/layouts/default.html" %}
 
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="bug icon"></i>
+			<div class="content">Something broke</div>
+		</h1>
+	</div>
+{% endblock %}
+
 {% block content %}
 	<div class="container">
-		<h1>Error (500)</h1>
-		<p class="lead">Sorry, the site has encountered an error.</p>
+		<div class="ui segment center aligned">
+			<p>Sorry, the site has encountered an error.</p>
+			<div class="ui buttons">
+				<a href="javascript:location.reload(true);" class="ui button">Try again</a>
+				<div class="or"></div>
+				<a href="/" class="ui positive button">Go home</a>
+			</div>
+		</div>
+
+		{% if user.isAdmin %}
+			<h5 class="ui top attached header">
+  			Error
+			</h5>
+			<div class="ui segment attached">
+				<pre>{{ error.stack }}</pre>
+			</div>
+		{% endif %}
 	</div>
 {% endblock %}
