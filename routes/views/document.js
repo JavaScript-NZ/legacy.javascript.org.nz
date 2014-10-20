@@ -2,6 +2,19 @@ var keystone = require('keystone'),
     fs = require('fs'),
     marked = require('marked');
 
+var documentMap = {
+  'rules': {
+    file: "/external/Society-Documentation/Rules.md",
+    title: "Society Rules",
+    icon: "book",
+  },
+  'conduct': {
+    file: "/external/Society-Documentation/Code_of_Conduct.md",
+    title: "Code of Conduct",
+    icon: "smile",
+  },
+}
+
 // This assumes a few things:
 // * The headings start at level 2
 // * There are only two levels of headings (level 2 and level 3)
@@ -29,7 +42,7 @@ function buildHeaderTree(tokens) {
 }
 
 function makeHeaderId(text) {
-	return 'rules-' + text.trim().toLowerCase().replace(/[^\w]+/g, '-');
+	return 'doc-' + text.trim().toLowerCase().replace(/[^\w]+/g, '-');
 }
 
 exports = module.exports = function(req, res) {
@@ -37,9 +50,19 @@ exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
 		locals = res.locals;
 
-	locals.section = 'rules';
+  var documentId = req.path.slice(1);
 
-	var fileName = keystone.get('basedir') + "/external/Society-Documentation/Rules.md";
+  if (!(documentId in documentMap)) {
+    req.notFound();
+    return;
+  }
+  var doc = documentMap[documentId];
+
+	locals.section = documentId;
+  locals.title = doc.title;
+  locals.icon = doc.icon;
+
+	var fileName = keystone.get('basedir') + doc.file;
 	fs.readFile(fileName, 'utf-8', function(err, data) {
 		if (err || !data || data.trim().length == 0) {
 			res.err(err);
@@ -68,12 +91,12 @@ exports = module.exports = function(req, res) {
 				renderer: renderer
 			});
 
-			locals.rules = {
+			locals.document = {
 				toc: headings,
 				content: output
 			};
 
-			view.render('rules');
+			view.render('document');
 		} catch (err) {
 			res.err(err);
 		}

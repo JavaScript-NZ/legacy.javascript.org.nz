@@ -29,6 +29,7 @@ exports.initLocals = function(req, res, next) {
 		/*{ label: 'Blog',		key: 'blog',		href: '/blog' },
 		{ label: 'Gallery',		key: 'gallery',		href: '/gallery' },*/
     { label: 'Rules',		key: 'rules',		href: '/rules' },
+    { label: 'Code of Conduct',		key: 'conduct',		href: '/conduct' },
     { label: 'Contact',		key: 'contact',		href: '/contact' }
 	];
 
@@ -43,13 +44,13 @@ exports.initLocals = function(req, res, next) {
 */
 
 exports.initErrorHandlers = function(req, res, next) {
-	res.err = function(err, title, message) {
+	res.err = function(err) {
 		res.status(500).render('errors/500', {
 			error: err
 		});
 	};
 
-	res.notfound = function(title, message) {
+	res.notFound = function() {
 		res.status(404).render('errors/404');
 	};
 

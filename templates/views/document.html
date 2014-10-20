@@ -1,0 +1,68 @@
+{% extends "templates/layouts/default.html" %}
+
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="{{ icon }} icon"></i>
+			<div class="content">{{ title }}</div>
+		</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="ui grid">
+		<div class="row">
+			<div class="four wide column">
+				{% if document.toc.length %}
+					<div id="toc" class="ui vertical accordion fluid menu">
+						{% for heading in document.toc %}
+							<div class="item">
+								<div class="title">
+									{{ heading.text }}
+								</div>
+								{% if heading.children.length %}
+									<div class="content menu">
+										{% for child in heading.children %}
+											<a class="item" href="#{{ child.id }}">{{ child.text }}</a>
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="twelve wide column">
+				<div id="doc">
+					{{ document.content }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script>$('.ui.accordion').accordion()</script>
+{% endblock %}
+
+{% block css %}
+	<style>
+		#toc {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		#doc li li {
+			list-style-type: decimal;
+		}
+
+		#doc li li {
+			list-style-type: lower-roman;
+		}
+
+		#doc li li li {
+			list-style-type: lower-latin;
+		}
+	</style>
+{% endblock %}
