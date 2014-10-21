@@ -4,9 +4,20 @@
 
 #nav {
 	background-color: rgba(0, 0, 0, 0.2);
+	z-index: 30;
+}
+
+#nav-backer {
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	height: 48px;
+	width: 100%;
+	z-index: 10;
 }
 
 .hero {
+	position: relative;
+	z-index: 20;
 	height: 319px;
 	background: url("/images/splash-1024.jpg") no-repeat scroll center center / cover #333;
 	text-align: center;
