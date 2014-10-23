@@ -37,40 +37,51 @@
 				<a href="/" class="item" style="padding: 0; margin: 0;">
 					<img src="/images/logo-48.png">
 				</a>
-				{% for link in navLinks %}
-					<div class="{{ 'active' if link.key == section else '' }} item">
-						<a href="{{ link.href }}">{{ link.label }}</a>
-					</div>
-				{% endfor %}
+				{% if not maintenance.show %}
+					{% for link in navLinks %}
+						<div class="{{ 'active' if link.key == section else '' }} item">
+							<a href="{{ link.href }}">{{ link.label }}</a>
+						</div>
+					{% endfor %}
+				{% endif %}
 			</div>
 			<div class="right menu">
-				{% if user %}
-					{% if user.canAccessKeystone %}
+				{% if maintenance.enabled and maintenance.canBypass %}
+					<div class="item">
+						<i class="wait icon"></i>
+						Maintainence
+					</div>
+				{% endif %}
+				{% if user.canAccessKeystone %}
 					<div class="item">
 						<a href="/keystone">
+							<i class="settings icon"></i>
 							Admin
 						</a>
-					</div
-					{% endif %}
+					</div>
+				{% endif %}
+				{% if user %}
 					<div class="item">
 						<a href="/keystone/signout">
 							<i class="sign out icon"></i>
 							Sign Out
 						</a>
 					</div>
-					{% else %}
+				{% else %}
 					<div class="item">
 						<a href="/keystone/signin">
 							<i class="sign in icon"></i>
 							Sign In
 						</a>
 					</div>
-					<div class="item">
-						<a href="/join">
-							<i class="users icon"></i>
-							Become a Member
-						</a>
-					</div>
+					{% if not maintenance.show %}
+						<div class="item">
+							<a href="/join">
+								<i class="users icon"></i>
+								Become a Member
+							</a>
+						</div>
+					{% endif %}
 				{% endif %}
 			</div>
 		</nav>

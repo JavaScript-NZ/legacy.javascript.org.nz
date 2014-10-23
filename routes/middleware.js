@@ -57,6 +57,22 @@ exports.initErrorHandlers = function(req, res, next) {
 	next();
 };
 
+exports.checkMaintenance = function(req, res, next) {
+  var maintenance = res.locals.maintenance = {
+    enabled: process.env.MAINTENANCE_ENABLED == 'true',
+    msg: process.env.MAINTENANCE_MSG,
+    canBypass: (!!req.user) && req.user.isAdmin,
+  };
+  maintenance.show = maintenance.enabled && !maintenance.canBypass;
+
+  if (maintenance.show && !req.path.match(/\/keystone/)) {
+    res.render('errors/maintenance');
+    return;
+  }
+
+  next();
+};
+
 
 /**
 	Fetches and clears the flashMessages before a view is rendered
