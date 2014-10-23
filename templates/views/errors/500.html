@@ -20,7 +20,7 @@
 			</div>
 		</div>
 
-		{% if user.isAdmin %}
+		{% if user.isAdmin or env == 'development' %}
 			<h5 class="ui top attached header">
   			Error
 			</h5>
