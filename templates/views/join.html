@@ -45,19 +45,21 @@
 			</div>
 
 			{% set class = ( "error" if validationErrors.agreeRules else "" ) %}
-			<div class="required field {{ class }}">
+			<div class="field {{ class }}">
 				<div class="ui toggle checkbox">
 					<input id="joinRules" type="checkbox" name="agreeRules" value="{{ formData["agreeRules"] }}">
-					<label>I agree to the <a href="/rules">JavaScript NZ Rules</a></label>
+					<label>I agree</label>
 				</div>
+				<span class="supplementary-label">to the <a href="/rules">JavaScript NZ Rules</a></span>
 			</div>
 
 			{% set class = ( "error" if validationErrors.agreeConduct else "" ) %}
-			<div class="required field {{ class }}">
+			<div class="field {{ class }}">
 				<div class="ui toggle checkbox">
 					<input id="joinConduct" type="checkbox" name="agreeConduct" value="{{ formData["agreeConduct"] }}">
-					<label>I agree to the <a href="/conduct">JavaScript NZ Code of Conduct</a></label>
+					<label>I agree</label>
 				</div>
+				<span class="supplementary-label">to the <a href="/conduct">JavaScript NZ Code of Conduct</a></span>
 			</div>
 
 			<div class="field">
