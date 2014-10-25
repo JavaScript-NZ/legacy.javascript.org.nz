@@ -35,52 +35,45 @@
 		<nav role="navigation" id="nav" class="ui fixed menu link green inverted">
 			<div class="left menu">
 				<a href="/" class="item" style="padding: 0; margin: 0;">
-					<img src="/images/logo-48.png">
+					<img src="/images/logo-48.png" alt="Home" title="Home">
 				</a>
 				{% if not maintenance.show %}
 					{% for link in navLinks %}
-						<div class="{{ 'active' if link.key == section else '' }} item">
-							<a href="{{ link.href }}">{{ link.label }}</a>
-						</div>
+						<a class="{{ 'active' if link.key == section else '' }} item"
+						   href="{{ link.href }}">
+							{{ link.label }}
+						</a>
 					{% endfor %}
 				{% endif %}
 			</div>
 			<div class="right menu">
 				{% if maintenance.enabled and maintenance.canBypass %}
-					<div class="item">
+					<div class="item maintenance">
 						<i class="wait icon"></i>
 						Maintainence
 					</div>
 				{% endif %}
 				{% if user.canAccessKeystone %}
-					<div class="item">
-						<a href="/keystone">
-							<i class="settings icon"></i>
-							Admin
-						</a>
-					</div>
+					<a class="item" href="/keystone">
+						<i class="settings icon"></i>
+						Admin
+					</a>
 				{% endif %}
 				{% if user %}
-					<div class="item">
-						<a href="/keystone/signout">
-							<i class="sign out icon"></i>
-							Sign Out
-						</a>
-					</div>
+					<a class="item" href="/keystone/signout">
+						<i class="sign out icon"></i>
+						Sign Out
+					</a>
 				{% else %}
-					<div class="item">
-						<a href="/keystone/signin">
-							<i class="sign in icon"></i>
-							Sign In
-						</a>
-					</div>
+					<a class="item" href="/keystone/signin">
+						<i class="sign in icon"></i>
+						Sign In
+					</a>
 					{% if not maintenance.show %}
-						<div class="item">
-							<a href="/join">
-								<i class="users icon"></i>
-								Become a Member
-							</a>
-						</div>
+						<a class="item" href="/join">
+							<i class="users icon"></i>
+							Become a Member
+						</a>
 					{% endif %}
 				{% endif %}
 			</div>
