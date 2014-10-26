@@ -34,6 +34,11 @@ keystone.init({
 	'user model': 'User',
 	'cookie secret': 'x`PkSgeo4Z6Q<X_!$|T;+:zNZc*Q"B+}pw9,5=Rd3Iak+oS{uV`~I~oxTtK5C,}T',
 
+	'cloudinary config': process.env.CLOUDINARY_URL || 'cloudinary://dummy:dummy@dummy',
+
+	'mandrill api key': process.env.MANDRILL_API_KEY || 'dummy',
+	'mandrill username': process.env.MANDRILL_USERNAME || 'dummy',
+
 	'basedir': __dirname
 });
 
