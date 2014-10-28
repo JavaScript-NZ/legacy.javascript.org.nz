@@ -81,7 +81,7 @@ exports = module.exports = function(req, res) {
 			var renderer = new marked.Renderer();
 			renderer.heading = function(text, level, raw) {
 				var id = makeHeaderId(text);
-				return '<a name="' + id + '" class="anchor"></a>' +
+				return '<a id="' + id + '" name="' + id + '" class="anchor"></a>' +
 				       '<h' + level + '>' +
 				       text +
 							 '</h' + level + '>\n';
