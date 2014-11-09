@@ -13,6 +13,7 @@ var _ = require('underscore'),
 	keystone = require('keystone');
 
 
+
 /**
 	Initialises the standard view locals
 	
@@ -102,4 +103,21 @@ exports.requireUser = function(req, res, next) {
 	} else {
 		next();
 	}
+};
+
+exports.paymentSetup = function(req, res, next) {
+	// https://github.com/gregwym/kaching-paypal
+	// Setup payment detail in `req.payment`.
+  req.payment = {
+    amount:{
+      total: 		'20.00',
+      currency: 'NZD'
+    },
+    redirect_urls: {
+      return_url: process.env.PAYPAL_RETURN_URL,
+      cancel_url: process.env.PAYPAL_CANCEL_URL
+    },
+    description: 'JavaScript New Zealand annual membership subscription.'
+  };
+  next();
 };
