@@ -37,13 +37,13 @@ var routes = {
 
 // Handle other errors
 keystone.set('500', function(err, req, res, next) {
-    var title, message;
-    console.log(err);
-    if (err instanceof Error) {
-        message = err.message;
-        err = err.stack;
-    }
-    res.err(err, title, message);
+		var title, message;
+		console.log(err);
+		if (err instanceof Error) {
+				message = err.message;
+				err = err.stack;
+		}
+		res.err(err, title, message);
 });
  
 // Setup Route Bindings
@@ -54,20 +54,22 @@ exports = module.exports = function(app) {
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
-  app.all('/rules', routes.views.document);
-  app.all('/conduct', routes.views.document);
-  app.all('/contact', routes.views.contact);
+	app.all('/rules', routes.views.document);
+	app.all('/conduct', routes.views.document);
+	app.all('/contact', routes.views.contact);
+	app.all('/join', routes.views.join);
 
-  app.get('/join', routes.views.join);
-  app.post('/join', middleware.paymentSetup, 
-				  					paypalClient.create('paypal', {}), 
-				  					// Add saving of user
-				  					paypalClient.approve('paypal'));
+//	app.get('/paypal/setup',  paypalClient.paymentSetup, 
+//														paypalClient.create, 
+//														paypalClient.savePaymentDetails,
+//														paypalClient.approve);//
 
-  app.get('/paypal-return', //Extract payment object,
-  													kaching.execute('paypal'))
-  													//Interpret the results and do stuff
-  app.get('/paypal-cancel', )
+//	app.get('/paypal/return', paypalClient.extractPaymentDetails,
+//														paypalClient.execute,
+//														routes.views.paypal);
+//														//Interpret the results and do stuff
+// 
+//	app.get('/paypal/cancel', routes.views.paypal)
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
