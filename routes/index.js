@@ -57,19 +57,24 @@ exports = module.exports = function(app) {
 	app.all('/rules', routes.views.document);
 	app.all('/conduct', routes.views.document);
 	app.all('/contact', routes.views.contact);
-	app.all('/join', routes.views.join);
+	app.get('/join', routes.views.join);
 
-//	app.get('/paypal/setup',  paypalClient.paymentSetup, 
-//														paypalClient.create, 
-//														paypalClient.savePaymentDetails,
-//														paypalClient.approve);//
+	app.post('/join', routes.views.join);
 
-//	app.get('/paypal/return', paypalClient.extractPaymentDetails,
-//														paypalClient.execute,
-//														routes.views.paypal);
-//														//Interpret the results and do stuff
-// 
-//	app.get('/paypal/cancel', routes.views.paypal)
+	app.get('/paypal/setup', 	paypalClient.setup,
+														paypalClient.create,
+														paypalClient.storePayment,
+														paypalClient.approve);
+
+	app.get('/paypal/return', 	paypalClient.extractPayment,
+															paypalClient.execute,
+															paypalClient.savePayment);
+
+	app.get('/paypal/approved', routes.views.paypal.success);
+	app.get('/paypal/failure',  routes.views.paypal.failure);
+	app.get('/paypal/canceled', paypalClient.cancel,
+															routes.views.paypal.cancel);
+
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -10,23 +10,23 @@ exports = module.exports = function(req, res) {
 	locals.validationErrors = {};
 
 	view.on('post', { action: 'join' }, function(next) {
-
-		var newUser = new User.model(),
-			updater = newUser.getUpdateHandler(req);
-		
-		updater.process(req.body, {
-			flashErrors: true,
-			fields: 'name, email, password, membershipType',
-			errorMessage: 'There was a problem creating your membership:'
-		}, function(err) {
+		var userData = {
+			name: 					req.body.name,
+			email: 					req.body.email,
+			password: 			req.body.password,
+			membershipType: req.body.membershipType
+		};
+		user = new User.model(userData);
+		user.save(function(err) {
+			console.log(err)
 			if (err) {
 				locals.validationErrors = err.errors;
 			} else {
-				return res.redirect('/paypal/setup');
+				console.log(user)
+				return res.redirect('paypal/setup?userId=' + user.id);
 			}
-			next();
+			next()
 		});
-
 	});
 
 	view.render('join');
