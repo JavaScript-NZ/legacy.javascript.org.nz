@@ -45,7 +45,7 @@ keystone.set('500', function(err, req, res, next) {
 		}
 		res.err(err, title, message);
 });
- 
+
 // Setup Route Bindings
 exports = module.exports = function(app) {
 
@@ -61,19 +61,19 @@ exports = module.exports = function(app) {
 
 	app.post('/join', routes.views.join);
 
-	app.get('/paypal/setup', 	paypalClient.setup,
-														paypalClient.create,
-														paypalClient.storePayment,
-														paypalClient.approve);
+  app.get('/paypal/setup',  paypalClient.setup,
+                            paypalClient.create,
+                            paypalClient.storePayment,
+                            paypalClient.approve);
 
-	app.get('/paypal/return', 	paypalClient.extractPayment,
-															paypalClient.execute,
-															paypalClient.savePayment);
+  app.get('/paypal/return', paypalClient.extractPayment,
+                            paypalClient.execute,
+                            paypalClient.savePayment);
 
-	app.get('/paypal/approved', routes.views.paypal.success);
-	app.get('/paypal/failure',  routes.views.paypal.failure);
-	app.get('/paypal/canceled', paypalClient.cancel,
-															routes.views.paypal.cancel);
+  app.get('/paypal/approved', routes.views.paypal.approved);
+  app.get('/paypal/failure',  routes.views.paypal.declined);
+  app.get('/paypal/canceled',   paypalClient.cancel,
+                                routes.views.paypal.canceled);
 
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
