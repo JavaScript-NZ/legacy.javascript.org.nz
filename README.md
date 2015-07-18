@@ -4,7 +4,9 @@
 
 This is built using [KeystoneJS](http://keystonejs.com/).
 
-To get this running, you at least need a MongoDB instance running.
+On first checkout you will need to init the git submodule for the Society-Documentation folder in /external. This can be initialised with the git command `git submodule update --init --recursive`.
+
+To get Keystone running, you at least need a MongoDB instance running, and you will need to run `npm install` in the project folder to get any dependancies. The development server can then be initiated with `node keystone`.
 
 ## Configuration
 
