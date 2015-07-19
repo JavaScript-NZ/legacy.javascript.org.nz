@@ -21,7 +21,8 @@
 var _ = require('underscore'),
 	keystone = require('keystone'),
 	middleware = require('./middleware'),
-	importRoutes = keystone.importer(__dirname);
+	importRoutes = keystone.importer(__dirname),
+	paypalClient = require('../lib/paypal-client')
 
 // Common Middleware
 keystone.pre('routes', middleware.initLocals);
@@ -34,6 +35,17 @@ var routes = {
 	views: importRoutes('./views')
 };
 
+// Handle other errors
+keystone.set('500', function(err, req, res, next) {
+		var title, message;
+		console.log(err);
+		if (err instanceof Error) {
+				message = err.message;
+				err = err.stack;
+		}
+		res.err(err, title, message);
+});
+
 // Setup Route Bindings
 exports = module.exports = function(app) {
 
@@ -42,10 +54,27 @@ exports = module.exports = function(app) {
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.get('/gallery', routes.views.gallery);
-  app.all('/rules', routes.views.document);
-  app.all('/conduct', routes.views.document);
-  app.all('/contact', routes.views.contact);
-  app.all('/join', routes.views.join);
+	app.all('/rules', routes.views.document);
+	app.all('/conduct', routes.views.document);
+	app.all('/contact', routes.views.contact);
+	app.get('/join', routes.views.join);
+
+	app.post('/join', routes.views.join);
+
+  app.get('/paypal/setup',  paypalClient.setup,
+                            paypalClient.create,
+                            paypalClient.storePayment,
+                            paypalClient.approve);
+
+  app.get('/paypal/return', paypalClient.extractPayment,
+                            paypalClient.execute,
+                            paypalClient.savePayment);
+
+  app.get('/paypal/approved', routes.views.paypal.approved);
+  app.get('/paypal/failure',  routes.views.paypal.declined);
+  app.get('/paypal/canceled',   paypalClient.cancel,
+                                routes.views.paypal.canceled);
+
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -1,4 +1,5 @@
 var keystone = require('keystone'),
+	mongoose = require('mongoose'),
 	Types = keystone.Field.Types;
 
 /**
@@ -14,6 +15,7 @@ User.add({
 	password: { type: Types.Password, initial: true, required: true },
 	groups: { type: Types.Relationship, ref: 'UserGroup', many: true },
 	registeredOn: { type: Types.Date, default: Date.now, noedit: true },
+	lastPaidAt: { type: Types.Date }
 }, 'Membership', {
 	membershipType: { type: Types.Select, options: 'unpaid, student, regular', required: true, emptyOption: false, default: 'unpaid' },
 	paidUntil: { type: Types.Date },
@@ -22,6 +24,11 @@ User.add({
 }, 'Permissions', {
 	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true },
 	committeeRole: { type: Types.Select, options: 'officer, treasurer, secretary, president' }
+});
+
+User.schema.add({
+	paymentToken: 	mongoose.Schema.Types.Mixed,
+	paymentDetails: mongoose.Schema.Types.Mixed
 });
 
 // Provide access to Keystone
