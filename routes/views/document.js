@@ -1,29 +1,31 @@
 var keystone = require('keystone'),
-    fs = require('fs'),
-    marked = require('marked');
+	fs = require('fs'),
+	marked = require('marked');
 
 var documentMap = {
-  'rules': {
-    file: "/external/Society-Documentation/Rules.md",
-    title: "Society Rules",
-    icon: "book",
-  },
-  'conduct': {
-    file: "/external/Society-Documentation/Code_of_Conduct.md",
-    title: "Code of Conduct",
-    icon: "smile",
-  },
+	'rules': {
+		file: "/src/Society-Documentation/Rules.md",
+		title: "Society Rules",
+		icon: "book",
+	},
+	'conduct': {
+		file: "/src/Society-Documentation/Code_of_Conduct.md",
+		title: "Code of Conduct",
+		icon: "smile",
+	},
 }
 
 // This assumes a few things:
 // * The headings start at level 2
 // * There are only two levels of headings (level 2 and level 3)
 function buildHeaderTree(tokens) {
-	var headingTokens = tokens.filter(function(item) { return item.type == 'heading'; });
+	var headingTokens = tokens.filter(function (item) {
+		return item.type == 'heading';
+	});
 	var toc = [];
 	var rootDepth = 2;
 	var parent = null;
-	headingTokens.forEach(function(token) {
+	headingTokens.forEach(function (token) {
 		depth = token.depth;
 		var heading = {
 			text: token.text,
@@ -45,25 +47,25 @@ function makeHeaderId(text) {
 	return 'doc-' + text.trim().toLowerCase().replace(/[^\w]+/g, '-');
 }
 
-exports = module.exports = function(req, res) {
+exports = module.exports = function (req, res) {
 
 	var view = new keystone.View(req, res),
 		locals = res.locals;
 
-  var documentId = req.path.slice(1);
+	var documentId = req.path.slice(1);
 
-  if (!(documentId in documentMap)) {
-    req.notFound();
-    return;
-  }
-  var doc = documentMap[documentId];
+	if (!(documentId in documentMap)) {
+		req.notFound();
+		return;
+	}
+	var doc = documentMap[documentId];
 
 	locals.section = documentId;
-  locals.title = doc.title;
-  locals.icon = doc.icon;
+	locals.title = doc.title;
+	locals.icon = doc.icon;
 
 	var fileName = keystone.get('basedir') + doc.file;
-	fs.readFile(fileName, 'utf-8', function(err, data) {
+	fs.readFile(fileName, 'utf-8', function (err, data) {
 		if (err || !data || data.trim().length == 0) {
 			res.err(err);
 			return;
@@ -79,12 +81,12 @@ exports = module.exports = function(req, res) {
 			// This should probably be cached, but marked claims it's fast enough
 			// to not need caching. We'll see.
 			var renderer = new marked.Renderer();
-			renderer.heading = function(text, level, raw) {
+			renderer.heading = function (text, level, raw) {
 				var id = makeHeaderId(text);
 				return '<a id="' + id + '" name="' + id + '" class="anchor"></a>' +
-				       '<h' + level + '>' +
-				       text +
-							 '</h' + level + '>\n';
+					'<h' + level + '>' +
+					text +
+					'</h' + level + '>\n';
 			};
 
 			var output = marked.parser(tokens, {
