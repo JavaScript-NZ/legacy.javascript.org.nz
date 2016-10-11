@@ -9,7 +9,7 @@ var documentMap = {
 		icon: "book",
 	},
 	'conduct': {
-		file: "/src/Society-Documentation/Code_of_Conduct.md",
+		file: "/src/Society-Documentation/Community_Code_of_Conduct.md",
 		title: "Code of Conduct",
 		icon: "smile",
 	},
