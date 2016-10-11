@@ -38,7 +38,7 @@ Enquiry.schema.post('save', function() {
 
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 
-	var enqiury = this;
+	var enquiry = this;
 
 	var recipientQuery = keystone.list('User').model.find();
 	if (this.enquiryType == 'committee')
@@ -56,7 +56,7 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 				email: 'contact@javascript.org.nz'
 			},
 			subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
-			enquiry: enqiury
+			enquiry: enquiry
 		}, callback);
 
 	});
