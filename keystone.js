@@ -11,6 +11,9 @@ var keystone = require('keystone'),
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
+nunjucks.configure(undefined, {
+	watch: false
+});
 
 keystone.init({
 	'name': 'JavaScript NZ',
