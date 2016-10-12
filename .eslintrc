@@ -1,0 +1,14 @@
+{
+  "ecmaFeatures": {
+    "globalReturn": true
+  },
+  "rules": {
+    "no-console": 0,
+    "quotes": [0],
+    "comma-dangle": 0,
+    "max-len": 0
+  },
+  "env": {
+    "node": true
+  }
+}
