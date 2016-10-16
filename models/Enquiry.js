@@ -30,14 +30,7 @@ Enquiry.schema.pre('save', function(next) {
 	next();
 })
 
-Enquiry.schema.post('save', function() {
-	if (this.wasNew) {
-		this.sendNotificationEmail();
-	}
-});
-
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
-
 	var enquiry = this;
 
 	var recipientQuery = keystone.list('User').model.find();
@@ -48,6 +41,8 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 
 	recipientQuery.exec(function(err, recipients) {
 		if (err) return callback(err);
+
+		console.log(recipients);
 
 		new keystone.Email('enquiry-notification').send({
 			to: recipients,

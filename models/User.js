@@ -41,8 +41,7 @@ User.relationship({ ref: 'Post', path: 'author' });
  * Schema methods
  */
 
-User.schema.methods.sendCommitteeEmail = function(callback) {
-	console.log('sendCommitteeEmail');
+User.schema.methods.sendMembershipRequestEmail = function(callback) {
 	var user = this;
 
 	var recipientQuery = keystone.list('User').model.find();
@@ -50,14 +49,24 @@ User.schema.methods.sendCommitteeEmail = function(callback) {
 	recipientQuery.exec(function(err) {
 		if (err) return callback(err);
 
-		new keystone.Email('user-membership').send({
-			to: 'james@macfie.co.nz',
+		new keystone.Email('membership-committee').send({
+			to: 'committee@javascript.org.nz',
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
 			subject: 'JavaScript NZ membership request',
-			enquiry: user
+			user: user
+		}, callback);
+
+		new keystone.Email('membership-user').send({
+			to: user.email,
+			from: {
+				name: 'JavaScript NZ',
+				email: 'contact@javascript.org.nz'
+			},
+			subject: 'JavaScript NZ membership request',
+			user: user
 		}, callback);
 	});
 }

@@ -75,7 +75,7 @@ exports = module.exports = function(req, res) {
 				locals.validationErrors = err.errors;
 			} else {
 				locals.joinSubmitted = true;
-				newUser.sendCommitteeEmail();
+				newUser.sendMembershipRequestEmail();
 			}
 			next();
 		});

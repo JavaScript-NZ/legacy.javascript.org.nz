@@ -1,0 +1,17 @@
+extends layouts/base
+
+- var membershipCost = "$25"
+
+
+block content
+	h1 Hi #{user.name}!
+
+	p Thanks for requesting to become a member of the JavaScript Society of New Zealand.
+	p One of the committee members will be firing an invoice your way for #{user.membershipType == "regular" ? "$25" : "$10"} shortly.
+
+	p &nbsp;
+
+	p Regards,
+	p The JavaScript Society of New Zealand committee
+
+

@@ -11,12 +11,13 @@
 
 {% block content %}
 	<div class="main container">
-		<p>In order to help pursure our goals of supporting and promoting JavaScript across New Zealand, we ask for a small yearly membership. If you're a student and are a bit strapped for cash then we have a reduced fee.</p>
-		<p>We don't want a membership fee to exclude anyone; if paying this fee would be unduely difficult for you, please <a href="/contact">contact us</a>.</p>
-
-		{% if enquirySubmitted %}
-			<h3>Thanks for your support! We'll be in touch soon.</h3>
+		{% if joinSubmitted %}
+			<div class="ui form segment">
+				<h3>Thanks for your support! We'll be in touch soon.</h3>
+			</div>
 		{% else %}
+			<p>In order to help pursure our goals of supporting and promoting JavaScript across New Zealand, we ask for a small yearly membership. If you're a student and are a bit strapped for cash then we have a reduced fee.</p>
+			<p>We don't want a membership fee to exclude anyone; if paying this fee would be unduely difficult for you, please <a href="/contact">contact us</a>.</p>
 			<form method="post" class="ui form segment">
 				<input type="hidden" name="action" value="join">
 

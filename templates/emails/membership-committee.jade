@@ -1,0 +1,14 @@
+extends layouts/base
+
+block content
+	h1 Hi there committee members,
+	p.text-larger A new membership request just came through! Here's the details:
+	if user.name.full || user.email
+		p.text-larger Name: <a href="mailto:#{user.email}">#{user.name}</a>
+
+	if user.membershipType == "regular"
+		p.text-larger Membership Type: Regular ($25)
+	else
+		p.text-larger Membership Type: Student ($10)
+	p &nbsp;
+	a(href='/keystone/user/#{user.id}') View details on the JSNZ website
