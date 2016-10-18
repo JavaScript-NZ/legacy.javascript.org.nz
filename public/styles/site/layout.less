@@ -20,6 +20,18 @@ body {
 	z-index: 10;
 }
 
+@media(max-width: 760px) {
+	#nav-backer {
+		height: 96px;
+	}
+}
+
+@media(max-width: 480px) {
+	#nav-backer {
+		display: none;
+	}
+}
+
 #nav > .menu > .item {
 	height: 48px;
 	padding: 15px;
@@ -27,6 +39,36 @@ body {
 
 #nav > .menu > .item.maintenance:hover {
 	cursor: default;
+}
+
+
+// Make the navigation responsive. Isn't the tidiest CSS, should be
+// change a fair bit when we update semantic UI
+@media(max-width: 760px) {
+	#nav {
+		.left, .right {
+			float: none;
+		}
+	}
+}
+
+@media(max-width: 480px) {
+	#nav > .menu > .item  {
+		display: block;
+	}
+
+	#nav {
+		.left {
+			.item:first-child {
+				background-color: rgba(0, 0, 0, 0.7);
+				z-index: 10;
+			}
+		}
+	}
+
+	.ui.menu.fixed { // *sigh*
+		position: static;
+	}
 }
 
 .hero {
@@ -48,7 +90,13 @@ body {
 
 .hero-logo {
 	margin-bottom: 20px;
-	margin-top: 60px;
+	margin-top: 90px;
+}
+
+@media(max-width: 480px) {
+	.hero-logo {
+		margin-top: 30px;
+	}
 }
 
 .hero-center {
