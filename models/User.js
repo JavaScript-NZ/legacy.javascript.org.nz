@@ -50,7 +50,7 @@ User.schema.methods.sendMembershipRequestEmail = function(callback) {
 		if (err) return callback(err);
 
 		new keystone.Email('membership-committee').send({
-			to: 'committee@javascript.org.nz',
+			to: 'society@javascript.org.nz',
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'

@@ -1,7 +1,7 @@
 extends layouts/base
 
 block content
-	h1 Hi *|first_name|*,
+	h1 Hi!,
 	p.text-larger An enquiry was just submitted to #{brand}:
 	if enquiry.name.full || enquiry.email
 		p.text-larger From:
@@ -21,4 +21,4 @@ block content
 		.text-larger !{enquiry.message.html}
 	p.text-muted Sent #{enquiry._.createdAt.format()}
 	p &nbsp;
-	a(href='/keystone/enquiries/#{enquiry.id}') Open in Keystone
+	a(href='http://jsnz.herokuapp.com/keystone/enquiries/#{enquiry.id}') Open in Keystone
