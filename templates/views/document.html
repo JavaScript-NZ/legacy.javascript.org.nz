@@ -17,9 +17,7 @@
 					<div id="toc" class="ui vertical accordion fluid menu">
 						{% for heading in document.toc %}
 							<div class="item">
-								<div class="title">
-									{{ heading.text }}
-								</div>
+								<a class="title" href="#{{ heading.id }}">{{ heading.text }}</a>
 								{% if heading.children.length %}
 									<div class="content menu">
 										{% for child in heading.children %}
