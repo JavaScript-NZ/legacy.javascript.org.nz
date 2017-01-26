@@ -16,7 +16,7 @@ exports = module.exports = function(req, res) {
 
 		updater.process(newNomination, {
 			flashErrors: true,
-			fields: 'firstName, lastName, reason',
+			fields: 'nominationType, firstName, lastName, reason',
 			errorMessage: 'There was a problem submitting your nomination:'
 		}, function(err) {
 			if (err) {
