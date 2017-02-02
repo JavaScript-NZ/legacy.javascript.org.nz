@@ -1,0 +1,72 @@
+{% extends "templates/layouts/default.html" %}
+
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="trophy icon"></i>
+			<div class="content">JavaScript NZ Awards</div>
+		</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="main container">
+		{% if nominationSubmitted %}
+			<div class="ui form segment">
+				<h3>Thanks! Your vote has been cast.</h3>
+			</div>
+		{% else %}
+			<p>The JavaScript NZ awards are a community driven award for excellence within the JavaScript NZ world. Award recipients are voted on and presented to each year at nz.js(con);</p>
+			<p>The categories for awards are:</p>
+			<ul>
+				<li>JS Contributor 2017</li>
+				<li>JS Educator 2017</li>
+			</ul>
+			<p>Nominations are now open via the form below. Feel free to nominate anybody you think is worthy of the award, including yourself!</p>
+
+			<form method="post" class="ui form segment">
+				<input type="hidden" name="action" value="awards">
+				<input type="hidden" name="award" value="JavaScript NZ 2017">
+
+				<div class="field">
+					<label>This nomination is for</label>
+					<select id="nominationType" name="nominationType" class="ui dropdown">
+						<option value="Contributor">JS Contributor 2017</option>
+						<option value="Educator">JS Educator 2017</option>
+					</select>
+				</div>
+
+				{% set class = ( "error" if validationErrors.firstName else "" ) %}
+				<div class="required field {{ class }}">
+						<label for="awardFirst">First name</label>
+						<input id="awardFirst" type="text" name="firstName" value="{{ formData["firstName"] }}">
+				</div>
+
+				{% set class = ( "error" if validationErrors.lastName else "" ) %}
+				<div class="required field {{ class }}">
+						<label for="awardLast">Last name</label>
+						<input id="awardLast" type="text" name="lastName" value="{{ formData["lastName"] }}">
+				</div>
+
+				<div class="field">
+						<label for="awardAka">Also known as</label>
+						<input id="awardAka" type="text" name="aka" value="{{ formData["aka"] }}">
+				</div>
+
+				{% set class = ( "error" if validationErrors.reason else "" ) %}
+				<div class="required field">
+						<label for="reason">Because: </label>
+						<textarea id="reason" name="reason">{{ formData["reason"] }}</textarea>
+				</div>
+
+				<div class="field">
+					<button class="ui green button" type="submit">Submit your nomination</button>
+				</div>
+			</form>
+		{% endif %}
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script>$('.ui.dropdown').dropdown(); $('.ui.checkbox').checkbox();</script>
+{% endblock %}

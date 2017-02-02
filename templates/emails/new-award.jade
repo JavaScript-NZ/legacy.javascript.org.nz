@@ -1,0 +1,16 @@
+extends layouts/base
+
+block content
+	h1 Hi there,
+	p.text-larger A new nomination for #{nomination.award} has been submitted!
+	p &nbsp;
+
+	p.text-large Name:  #{nomination.firstName} #{nomination.lastName} #{nomination.aka && nomination.aka.length ? "(aka, " + nomination.aka + ")" : ""}
+
+	p.text-larger Nomination for: #{nomination.nominationType}
+	p &nbsp;
+
+	p.text-larger Reason: #{nomination.reason}
+
+	p &nbsp;
+	a(href='http://javascript.org.nz/keystone/nominations') View all nominations on the JSNZ site
