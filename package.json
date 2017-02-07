@@ -19,8 +19,8 @@
     "gulp-watch": "~0.6.5"
   },
   "engines": {
-    "node": ">=6.5.0",
-    "npm": ">=3.10.3"
+    "node": ">=4.7.3",
+    "npm": ">=2.15.11"
   },
   "scripts": {
     "start": "node keystone.js"
