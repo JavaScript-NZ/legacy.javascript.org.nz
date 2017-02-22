@@ -12,6 +12,15 @@ var documentMap = {
 		file: "/src/Society-Documentation/Community_Code_of_Conduct.md",
 		title: "Code of Conduct",
 		icon: "smile",
+		externals: [{
+			link: '/conduct/reports',
+			title: 'Reports'
+		}]
+	},
+	'conduct/reports': {
+		file: "/src/Society-Documentation/Code_of_Conduct_Report.md",
+		title: "Code of Conduct Report",
+		icon: "flag"
 	},
 }
 
@@ -95,7 +104,8 @@ exports = module.exports = function (req, res) {
 
 			locals.document = {
 				toc: headings,
-				content: output
+				content: output,
+				externals: doc.externals
 			};
 
 			view.render('document');

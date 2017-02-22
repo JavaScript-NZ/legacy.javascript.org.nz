@@ -11,7 +11,7 @@
 
 {% block content %}
 	<div class="ui grid">
-		<div class="row">
+		<div class="row main container">
 			<div class="four wide column">
 				{% if document.toc.length %}
 					<div id="toc" class="ui vertical accordion fluid menu">
@@ -27,6 +27,13 @@
 								{% endif %}
 							</div>
 						{% endfor %}
+						{% if document.externals %}
+							{% for external in document.externals %}
+								<div class="item">
+									<a class="title" href="{{ external.link }}">{{ external.title }}</a>
+								</div>
+							{% endfor %}
+						{% endif %}
 					</div>
 				{% endif %}
 			</div>

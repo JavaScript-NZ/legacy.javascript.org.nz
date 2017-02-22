@@ -44,6 +44,7 @@ exports = module.exports = function(app) {
 	app.get('/gallery', routes.views.gallery);
   app.all('/rules', routes.views.document);
   app.all('/conduct', routes.views.document);
+	app.all('/conduct/reports', routes.views.document);
   app.all('/contact', routes.views.contact);
   app.all('/join', routes.views.join);
 	app.all('/awards', routes.views.awards);
