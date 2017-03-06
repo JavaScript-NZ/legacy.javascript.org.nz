@@ -27,7 +27,7 @@ exports.initLocals = function(req, res, next) {
 	locals.navLinks = [
 		/*{ label: 'Blog',		key: 'blog',		href: '/blog' },
 		{ label: 'Gallery',		key: 'gallery',		href: '/gallery' },*/
-		// { label: 'JSNZ 2017 Awards',		key: 'awards',		href: '/awards' },
+		{ label: 'JSNZ 2017 Awards',		key: 'awards',		href: '/awards' },
     { label: 'Rules',		key: 'rules',		href: '/rules' },
     { label: 'Code of Conduct',		key: 'conduct',		href: '/conduct' },
     { label: 'Contact',		key: 'contact',		href: '/contact' }

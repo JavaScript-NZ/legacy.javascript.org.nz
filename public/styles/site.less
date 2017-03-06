@@ -11,6 +11,8 @@
 	width: 100%;
 }
 
+// Awards
+
 .awardIcon {
 	text-align: center!important; // Urgh, semantic and it's deep selectors
 }
@@ -23,6 +25,38 @@
 	font-size: 4em;
 	padding-top: 20px;
 }
+
+.nomination {
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	display: flex;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.nominationTitle {
+	margin: 0 0 10px;
+}
+
+.nominationImage {
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	flex-shrink: 0;
+	height: 80px;
+	width: 80px;
+	margin-right: 20px;
+}
+
+.nominationDetails {
+	flex-grow: 1;
+}
+
+@media(max-width: 767px) {
+	.ui.stackable.grid>.column.awardNominations {
+		// Semantic UI is the worst
+		padding: 0!important;
+	}
+}
+
 
 // Add your own site style includes here
 @import "site/layout.less";

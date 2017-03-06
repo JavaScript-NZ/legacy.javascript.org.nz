@@ -11,60 +11,93 @@
 
 {% block content %}
 	<div class="main container">
-		{% if nominationSubmitted %}
-			<div class="ui form segment">
-				<h3>Thanks! Your vote has been cast.</h3>
+		<p>The JavaScript NZ awards are a community driven award for excellence within the JavaScript NZ world. Award recipients are voted on and presented to each year at nz.js(con);</p>
+		<p>The categories for awards are:</p>
+		<ul>
+			<li>JS Contributor 2017</li>
+			<li>JS Educator 2017</li>
+		</ul>
+		<p>This year we had 10 nominations; 4 for JS Contributer and 6 for JS Educator. You can read who was nominated and why below.</p>
+		<p>The voting and the ceremony will take place at nz.js(conf); 9-10th of March.</p>
+		<div class="ui stackable two column grid">
+			<div class="column awardNominations">
+				<h2>JS Contributor Nominations 2017</h2>
+				<div class="nomination">
+					<img src="https://pbs.twimg.com/profile_images/707474401122500609/uZwVAOeA.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Alex Gibson (<a href="https://twitter.com/prototypealex/">@prototypealex</a>)</h3>
+						<p>Wellington.js, JS committee, nodebots. Always organizing things around the JS community.</p>
+					</div>
+				</div>
+				<div class="nomination">
+					<img src="https://pbs.twimg.com/profile_images/631577653/IMG_3465_800x800_400x400.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Ingo Schommer (<a href="https://twitter.com/chillu/">@chillu</a>)</h3>
+						<p>Bringing innovative technologies to projects while at the same time drives standardised practices and practicality to everyone he talks to. Driving the GraphQL lead even though when everyone else doubted it, and continues to pursue a better work environment everyday.</p>
+					</div>
+				</div>
+				<div class="nomination">
+					<img src="https://pbs.twimg.com/profile_images/1440010358/jrobot_400x400.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Jen Zajac (<a href="https://twitter.com/jenofdoom/">@jenofdoom</a>)</h3>
+						<p>For her willpower that's driving nz.js(con) to existence. She's awesome! 😀</p>
+						<p>Excellence in organising the NZ js Conference and overall community contributions.</p>
+					</div>
+				</div>
+				<div class="nomination">
+					<img src="https://ca.slack-edge.com/T09HZENRK-U09J04FPG-g7f15b4d2a8b-144" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Kevin Isom</h3>
+						<p>His work running the AKJS scene has been excellent.</p>
+					</div>
+				</div>
 			</div>
-		{% else %}
-			<p>The JavaScript NZ awards are a community driven award for excellence within the JavaScript NZ world. Award recipients are voted on and presented to each year at nz.js(con);</p>
-			<p>The categories for awards are:</p>
-			<ul>
-				<li>JS Contributor 2017</li>
-				<li>JS Educator 2017</li>
-			</ul>
-			<p>Nominations are now open via the form below. Feel free to nominate anybody you think is worthy of the award, including yourself!</p>
-			<p>The nominating will close on Sunday 5th of March 23:59 NZT.</p>
-
-			<form method="post" class="ui form segment">
-				<input type="hidden" name="action" value="awards">
-				<input type="hidden" name="award" value="JavaScript NZ 2017">
-
-				<div class="field">
-					<label>This nomination is for</label>
-					<select id="nominationType" name="nominationType" class="ui dropdown">
-						<option value="Contributor">JS Contributor 2017</option>
-						<option value="Educator">JS Educator 2017</option>
-					</select>
+			<div class="column awardNominations">
+				<h2>JS Educator Nominations 2017</h2>
+				<div class="nomination">
+					<img src="https://pbs.twimg.com/profile_images/707474401122500609/uZwVAOeA.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Alex Gibson (<a href="https://twitter.com/prototypealex/">@prototypealex</a>)</h3>
+						<p>I always see his name come up with relation to nodebots. He does piles of awesome work around giving kids the opportunity to experience coding in a fun environment. He is A+.</p>
+					</div>
 				</div>
-
-				{% set class = ( "error" if validationErrors.firstName else "" ) %}
-				<div class="required field {{ class }}">
-						<label for="awardFirst">First name</label>
-						<input id="awardFirst" type="text" name="firstName" value="{{ formData["firstName"] }}">
+				<div class="nomination">
+					<img src="https://ca.slack-edge.com/T09HZENRK-U0D7VVDHS-ga87f187ec74-144" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Anna Lezhikova</h3>
+						<p>She taught me lots about functional programming and Elm through her functional meetup. V cool.</p>
+					</div>
 				</div>
-
-				{% set class = ( "error" if validationErrors.lastName else "" ) %}
-				<div class="required field {{ class }}">
-						<label for="awardLast">Last name</label>
-						<input id="awardLast" type="text" name="lastName" value="{{ formData["lastName"] }}">
+				<div class="nomination">
+					<img src="https://pbs.twimg.com/profile_images/504725173023432704/t0qT1f2T.png" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Don Smith (<a href="https://twitter.com/locksmithdon/">@locksmithdon</a>)</h3>
+						<p>Don seized the opportunity to lead the opening of a new Enspiral Dev Academy branch in Auckland. The huge amounts of curriculum he has written for Node, React and Redux are impressive enough, but he has also provided leadership and experience to the teaching team. He frequently spends evenings and weekends in EDA-related activities and sacrificed a significant previous income in order to teach. Don's manner with students is exemplary. He is genuine and present in the moment with each person, and it's clear he loves both the code and the teaching of it. He is consistently welcoming, supportive, and inclusive of the wider JS community at the school.</p>
+					</div>
 				</div>
-
-				<div class="field">
-						<label for="awardAka">Also known as</label>
-						<input id="awardAka" type="text" name="aka" value="{{ formData["aka"] }}">
+				<div class="nomination">
+					<img src="/images/person.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Jacob Duval</h3>
+						<p>Jacob has done a great job for the past two years as the key, and often solo, organiser of the Node JS meetup in Auckland. He's has grown it from 20-30 people to over 100 people attending monthly. Keeping it free, even when that meant paying for drinks and food out of his own pocket. He always puts on a great event and has made it a very open environment where people discuss Node, JS, general web, robotics and anything else that can be related back to Javascript. Without Jacob driving the JS meetup in Auckland, the community would be a lot more disperse, fragmented and way less engaged. And he has done all this while founding and running one of NZs brightest JS-backed startups, Mish Guru. I can not recommend him enough, and deserves some recognition for all his hard work.</p>
+					</div>
 				</div>
-
-				{% set class = ( "error" if validationErrors.reason else "" ) %}
-				<div class="required field">
-						<label for="reason">Because: </label>
-						<textarea id="reason" name="reason">{{ formData["reason"] }}</textarea>
+				<div class="nomination">
+					<img src="/images/person.jpg" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Piet Geursen</h3>
+						<p>I was a student at Enspiral Dev Academy last year where Piet was the teacher and I can honestly say I have never met someone so invested on teaching as he is. I will always have the most convoluted questions to ask in class and he will always find time to answer them, to go above and beyond for his students. His devotion to our learning was not only seen on the teaching of Javascript which he did during long day after day, but he also shared with us the classes of engineer's empathy. These classes were about being a better person and getting closer to other people. It was not mandatory for him to be there, to expose himself like that, but he still did it because he thought it was important. I am sure I have learned Javascript the best possible way, as he is quite adamant in all the best practises, but most importantly I learned that you can be an amazing person and work fantastically with others. Thanks to him I can now believe I am a programmer.</p>
+					</div>
 				</div>
-
-				<div class="field">
-					<button class="ui green button" type="submit">Submit your nomination</button>
+				<div class="nomination">
+					<img src="https://ca.slack-edge.com/T09HZENRK-U3N08B5EF-g83d08f6238e-144" class="nominationImage" />
+					<div class="nominationDetails">
+						<h3 class="nominationTitle">Simon Tegg</h3>
+						<p>He taught at Enspiral Dev Academy. Simon was a patient and thoughtful teacher. He used a variety of methods and scaffolded the learning really well in order for students to develop their understanding fast and with a good general overview of the JS technologies available. He made JS accessible, and interesting. Simon is a fantastic voice for JS and I think we are lucky he chose that language to become expert in.</p>
+					</div>
 				</div>
-			</form>
-		{% endif %}
+			</div>
+		</div>
 	</div>
 {% endblock %}
 

@@ -47,7 +47,7 @@ exports = module.exports = function(app) {
 	app.all('/conduct/reports', routes.views.document);
   app.all('/contact', routes.views.contact);
   app.all('/join', routes.views.join);
-	// app.all('/awards', routes.views.awards);
+	app.all('/awards', routes.views.awards);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
