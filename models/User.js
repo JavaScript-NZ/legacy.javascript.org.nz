@@ -16,7 +16,9 @@ User.add({
 	registeredOn: { type: Types.Date, default: Date.now, noedit: true },
 }, 'Membership', {
 	membershipType: { type: Types.Select, options: 'unpaid, student, regular', required: true, emptyOption: false, default: 'unpaid' },
-	paidUntil: { type: Date, default: new Date().setYear(new Date().getFullYear() + 1) }
+	paidUntil: { type: Date },
+	stripeSubscriptionActive: { type: Boolean, label: 'Active subscription' },
+	stripeSubscriptionId: { type: String, noedit: true }
 }, 'Profile', {
 	visibility: { type: Types.Select, options: [{value: 0, label: 'Committee only'}, {value: 1, label: 'Members only'}, {value: 2, label: 'Public'}], required: true, emptyOption: false, default: 0, initial: true },
 }, 'Permissions', {
@@ -36,12 +38,41 @@ User.schema.virtual('canAccessKeystone').get(function() {
 
 User.relationship({ ref: 'Post', path: 'author' });
 
-
 /**
  * Schema methods
  */
 
-User.schema.methods.sendMembershipRequestEmail = function(callback) {
+// User.schema.methods.sendMembershipRequestEmail = function(callback) {
+// 	var user = this;
+
+// 	var recipientQuery = keystone.list('User').model.find();
+
+// 	recipientQuery.exec(function(err) {
+// 		if (err) return callback(err);
+
+// 		new keystone.Email('membership-committee').send({
+// 			to: 'society@javascript.org.nz',
+// 			from: {
+// 				name: 'JavaScript NZ',
+// 				email: 'contact@javascript.org.nz'
+// 			},
+// 			subject: 'JavaScript NZ membership request',
+// 			user: user
+// 		}, callback);
+
+// 		new keystone.Email('membership-user').send({
+// 			to: user.email,
+// 			from: {
+// 				name: 'JavaScript NZ',
+// 				email: 'contact@javascript.org.nz'
+// 			},
+// 			subject: 'JavaScript NZ membership request',
+// 			user: user
+// 		}, callback);
+// 	});
+// }
+
+User.schema.methods.sendMembershipEmail = function(callback) {
 	var user = this;
 
 	var recipientQuery = keystone.list('User').model.find();
@@ -55,7 +86,7 @@ User.schema.methods.sendMembershipRequestEmail = function(callback) {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'JavaScript NZ membership request',
+			subject: 'New JavaScript NZ member',
 			user: user
 		}, callback);
 
@@ -65,12 +96,32 @@ User.schema.methods.sendMembershipRequestEmail = function(callback) {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'JavaScript NZ membership request',
+			subject: 'Your JavaScript NZ membership',
 			user: user
 		}, callback);
 	});
 }
 
+
+User.schema.methods.sendCancellationEmail = function(callback) {
+	var user = this;
+
+	var recipientQuery = keystone.list('User').model.find();
+
+	recipientQuery.exec(function(err) {
+		if (err) return callback(err);
+
+	new keystone.Email('cancellation-user').send({
+			to: user.email,
+			from: {
+				name: 'JavaScript NZ',
+				email: 'contact@javascript.org.nz'
+			},
+			subject: 'Your JavaScript NZ membership cancellation',
+			user: user
+		}, callback);
+	});
+}
 
 /**
  * Registration
