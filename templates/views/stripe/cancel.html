@@ -1,19 +1,30 @@
 {% extends "templates/layouts/default.html" %}
 
 {% block content %}
-	{% if cancellationSuccessful %}
-		<div class="ui form segment">
-			<h3>Boo :(</h3>
-		</div>
-	{% endif %}
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-				<form method="post" id="payment-form">
-					<input type="hidden" name="action" value="cancel">
-					<button>Cancel?</button>
-				</form>
+	<div class="main container">
+		{% if cancellationSuccessful %}
+			<div class="ui form segment">
+				<h3>Your subscription has been cancelled</h3>
+				<p>Sorry to see you go. If you have any feedback for the society about things we could do better then <a herf="/contact">we'd really love to hear from you</a>.</p>
+				<p>Thanks for all your support and we hope to see you again soon</p>
 			</div>
-		</div>
+		{% else %}
+				<div class="container">
+				<div class="row">
+					<div class="ui form segment">
+						<h3>Subscription cancellation for {{ user.name }}</h3>
+						<p>If you would like to stop supporting the JavaScript Society of New Zealand then simply click the cancel button below.</p>
+						<div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+							<form method="post" id="payment-form">
+								<input type="hidden" name="action" value="cancel">
+								<div class="field">
+									<button class="ui red button" type="submit">Cancel your membership</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
 	</div>
 {% endblock %}

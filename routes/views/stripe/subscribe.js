@@ -20,7 +20,7 @@ exports = module.exports = function(req, res) {
 					return res.redirect('/');
 				}
 
-				locals.user = user;
+				locals.newUser = user;
 				return next();
 
 			}
