@@ -42,36 +42,6 @@ User.relationship({ ref: 'Post', path: 'author' });
  * Schema methods
  */
 
-// User.schema.methods.sendMembershipRequestEmail = function(callback) {
-// 	var user = this;
-
-// 	var recipientQuery = keystone.list('User').model.find();
-
-// 	recipientQuery.exec(function(err) {
-// 		if (err) return callback(err);
-
-// 		new keystone.Email('membership-committee').send({
-// 			to: 'society@javascript.org.nz',
-// 			from: {
-// 				name: 'JavaScript NZ',
-// 				email: 'contact@javascript.org.nz'
-// 			},
-// 			subject: 'JavaScript NZ membership request',
-// 			user: user
-// 		}, callback);
-
-// 		new keystone.Email('membership-user').send({
-// 			to: user.email,
-// 			from: {
-// 				name: 'JavaScript NZ',
-// 				email: 'contact@javascript.org.nz'
-// 			},
-// 			subject: 'JavaScript NZ membership request',
-// 			user: user
-// 		}, callback);
-// 	});
-// }
-
 User.schema.methods.sendMembershipEmail = function(callback) {
 	var user = this;
 

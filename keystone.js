@@ -15,6 +15,8 @@ nunjucks.configure(undefined, {
 	watch: false
 });
 
+console.log(process.env.MANDRILL_API_KEY);
+
 keystone.init({
 	'name': 'JavaScript NZ',
 	'brand': 'JavaScript NZ',
