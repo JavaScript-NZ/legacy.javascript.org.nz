@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<script>
-				var stripe = Stripe('pk_test_pKr8dO7B71fCVu6SZAGmdx5E'); // TODO - put in env variable or something
+				var stripe = Stripe(process.env.STRIPE_PUB_KEY);
 				var elements = stripe.elements();
 
 				// Custom styling can be passed to options when creating an Element.
