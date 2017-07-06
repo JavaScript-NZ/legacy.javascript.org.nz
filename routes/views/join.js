@@ -1,5 +1,5 @@
 const keystone = require('keystone');
-const stripe = require("stripe")("sk_test_P6xiCHLAqPLSXdc8aDXNXnnC"); // TODO  - env variable here
+const stripe = require("stripe")(process.env.STRIPE_KEY); // TODO  - env variable here
 const User = keystone.list('User');
 
 /**

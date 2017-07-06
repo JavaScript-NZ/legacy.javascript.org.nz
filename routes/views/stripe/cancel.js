@@ -1,5 +1,5 @@
 var keystone = require('keystone');
-var stripe = require("stripe")("sk_test_P6xiCHLAqPLSXdc8aDXNXnnC"); // TODO  - env variable here
+var stripe = require("stripe")(process.env.STRIPE_KEY);
 var User = keystone.list('User');
 
 exports = module.exports = function(req, res) {
