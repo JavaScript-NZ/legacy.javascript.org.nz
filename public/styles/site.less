@@ -7,54 +7,79 @@
 // ===========
 
 .jsconImage {
-	padding-top: 15px;
-	width: 100%;
+  padding-top: 15px;
+  width: 100%;
 }
 
 // Awards
 
 .awardIcon {
-	text-align: center!important; // Urgh, semantic and it's deep selectors
+  text-align: center!important; // Urgh, semantic and it's deep selectors
 }
 
 .awardIcon a {
-	color: rgba(0,0,0,.8);
+  color: rgba(0,0,0,.8);
 }
 
 .awardIcon i {
-	font-size: 4em;
-	padding-top: 20px;
+  font-size: 4em;
+  padding-top: 20px;
 }
 
 .nomination {
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	display: flex;
-	margin-bottom: 20px;
-	padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .nominationTitle {
-	margin: 0 0 10px;
+  margin: 0 0 10px;
 }
 
 .nominationImage {
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 2px;
-	flex-shrink: 0;
-	height: 80px;
-	width: 80px;
-	margin-right: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+  flex-shrink: 0;
+  height: 80px;
+  width: 80px;
+  margin-right: 20px;
 }
 
 .nominationDetails {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 @media(max-width: 767px) {
-	.ui.stackable.grid>.column.awardNominations {
-		// Semantic UI is the worst
-		padding: 0!important;
-	}
+  .ui.stackable.grid>.column.awardNominations {
+    // Semantic UI is the worst
+    padding: 0!important;
+  }
+}
+
+
+.StripeElement {
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(39,41,43,.15);
+  border-radius: .2857rem;
+  box-shadow: 0 0 transparent inset;
+  margin-bottom: 20px;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
 
 

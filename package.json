@@ -9,6 +9,7 @@
     "keystone": "^0.3.19",
     "marked": "^0.3.3",
     "nunjucks": "^1.3.4",
+    "stripe": "^4.17.0",
     "underscore": "~1.7.0"
   },
   "devDependencies": {

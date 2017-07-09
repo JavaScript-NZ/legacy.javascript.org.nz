@@ -1,4 +1,5 @@
 const keystone = require('keystone');
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 const User = keystone.list('User');
 
 /**
@@ -75,7 +76,8 @@ exports = module.exports = function(req, res) {
 				locals.validationErrors = err.errors;
 			} else {
 				locals.joinSubmitted = true;
-				newUser.sendMembershipRequestEmail();
+
+				return res.redirect('account/subscribe?userId=' + newUser.id);
 			}
 			next();
 		});

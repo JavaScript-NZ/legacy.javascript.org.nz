@@ -1,13 +1,18 @@
 extends layouts/base
 
-- var membershipCost = "$25"
-
-
 block content
 	h1 Hi #{user.name}!
 
-	p Thanks for requesting to become a member of the JavaScript Society of New Zealand.
-	p One of the committee members will be firing an invoice your way for #{user.membershipType == "regular" ? "$25" : "$10"} shortly.
+	p Thanks for opting to become a member of the JavaScript Society of New Zealand. Your support goes a long way to helping out the local JavaScript society and is hugely appreciated by us all on the committee.
+
+	p For your reference here are your membership details
+
+	p Membership type: #{user.membershipType}
+	p Annual cost: #{user.membershipType == "regular" ? "$25" : "$10"}
+
+	p &nbsp;
+
+	p If you decide that you wish to cancel your membership you can do so by #[a(href='http://javascript.org.nz/account/cancel?userId=#{user.)id}')visiting our cancellation page].
 
 	p &nbsp;
 
