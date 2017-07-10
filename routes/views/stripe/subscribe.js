@@ -56,7 +56,7 @@ exports = module.exports = function(req, res) {
 					user.save();
 
 					locals.subscriptionSuccessful = true;
-
+					user.sendMembershipEmail();
 					next();
 				});
 			}
