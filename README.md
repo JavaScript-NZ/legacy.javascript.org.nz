@@ -6,7 +6,13 @@ This is built using [KeystoneJS](http://keystonejs.com/).
 
 On first checkout you will need to init the git submodule for the Society-Documentation folder in /external. This can be initialised with the git command `git submodule update --init --recursive`.
 
-To get Keystone running, you at least need a MongoDB instance running, and you will need to run `npm install` in the project folder to get any dependancies. The development server can then be initiated with `node keystone`.
+To get Keystone running, you at least need a MongoDB instance running, and you will need to run `npm install` in the project folder to get any dependancies. The development server can then be initiated with `npm start`.
+
+### Migrating to Node 8 and Keystone 4
+
+Make sure you run `npm update -g`.
+
+Then read the [v0.3 to v4 migration guide](https://github.com/keystonejs/keystone/blob/master/docs/guides/v0.3-to-v4.0-Upgrade-Guide.md)
 
 ## Configuration
 
