@@ -42,10 +42,13 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 	recipientQuery.exec(function(err, recipients) {
 		if (err) return callback(err);
 
-		console.log(recipients);
+		// console.log(recipients);
 
 		new keystone.Email('enquiry-notification').send({
-			to: recipients,
+			// Just hard code this to the society email address for the moment. Something is up with the Keystone
+			// query
+			to: 'society@javascript.org.nz',
+			// to: recipients,
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
