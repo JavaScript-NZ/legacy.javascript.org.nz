@@ -42,6 +42,7 @@ exports = module.exports = function(req, res) {
 					user.save();
 
 					locals.cancellationSuccessful = true;
+					user.sendCancellationEmail();
 
 					next();
 				});

@@ -6,6 +6,7 @@ exports = module.exports = function(req, res) {
 	var view = new keystone.View(req, res),
 		locals = res.locals;
 
+	locals.stripePublicKey = process.env.STRIPE_PUB_KEY;
 	locals.userId = req.query.userId;
 
 	view.on('init', function(next) {
@@ -56,7 +57,7 @@ exports = module.exports = function(req, res) {
 					user.save();
 
 					locals.subscriptionSuccessful = true;
-
+					user.sendMembershipEmail();
 					next();
 				});
 			}
