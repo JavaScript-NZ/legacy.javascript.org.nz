@@ -37,7 +37,7 @@ Enquiry.schema.methods.sendNotificationEmail = function(enquiry, callback) {
 	new Email('enquiry-notification.pug', emailDefaults).send({
 		enquiry: enquiry
 	}, {
-		to: 'committee@javascript.org.ns',
+		to: 'committee@javascript.org.nz',
 		from: {
 			name: 'JavaScript NZ',
 			email: 'contact@javascript.org.nz'
