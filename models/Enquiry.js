@@ -32,16 +32,17 @@ Enquiry.schema.pre('save', function(next) {
 	next();
 })
 
-Enquiry.schema.methods.sendNotificationEmail = function(callback) {
+Enquiry.schema.methods.sendNotificationEmail = function(enquiry, callback) {
+	var enquiry = this;
 	new Email('enquiry-notification.pug', emailDefaults).send({
 		enquiry: enquiry
 	}, {
-		to: 'committee@javascript.org.nz',
+		to: 'committee@javascript.org.ns',
 		from: {
 			name: 'JavaScript NZ',
 			email: 'contact@javascript.org.nz'
 		},
-		subject: 'JavaScript NZ website enquiry'
+		subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
 	}, callback)
 }
 
