@@ -12,6 +12,7 @@
     "nunjucks": "*",
     "pug": "^2.0.3",
     "stripe": "*",
+    "superagent": "^4.0.0-beta.5",
     "underscore": "*"
   },
   "devDependencies": {

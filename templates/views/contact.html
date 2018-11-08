@@ -10,12 +10,13 @@
 {% endblock %}
 
 {% block content %}
+	<script src='https://www.google.com/recaptcha/api.js?render=6LdbaXkUAAAAAN8tATysXHZxgwNitR7sisPZhFyz'></script>
 	<div class="main container">
 		<div class="ui form segment">
 		{% if enquirySubmitted %}
 			<h3>Thanks for getting in touch.</h3>
 		{% else %}
-			<form method="post">
+			<form id="contact-form" method="post">
 				<input type="hidden" name="action" value="contact">
 
 				{% set class = ( "error" if validationErrors.name else "" ) %}
@@ -63,5 +64,32 @@
 {% endblock %}
 
 {% block js %}
-<script>$('.ui.dropdown').dropdown();</script>
+<script>
+	var hasSubmitted = false;
+	var submitForm = $('#contact-form');
+	$('.ui.dropdown').dropdown();
+	grecaptcha.ready(function() {
+		// Validate captcha token before sending back to the server
+		submitForm.submit(function(event) {
+			if (hasSubmitted) {
+				return true;
+			}
+			
+			event.preventDefault();
+			grecaptcha.execute('6LdbaXkUAAAAAN8tATysXHZxgwNitR7sisPZhFyz', {
+				action: 'contact'
+			}).then(function(token) {
+				var input = $("<input>")
+						.attr("type", "hidden")
+						.attr("name", "recaptcha").val(token);
+				submitForm.append(input);
+				// Calling .submit fires off this event listener again. Put a flag in here so that it doesn't loop infinitly
+				hasSubmitted = true;
+				submitForm.submit();
+			});
+		});
+});
+		
+
+</script>
 {% endblock %}
