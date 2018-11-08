@@ -41,7 +41,7 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 			name: 'JavaScript NZ',
 			email: 'contact@javascript.org.nz'
 		},
-		subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
+		subject: 'JavaScript NZ website enquiry'
 	}, callback)
 }
 
