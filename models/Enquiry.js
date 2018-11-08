@@ -33,28 +33,16 @@ Enquiry.schema.pre('save', function(next) {
 })
 
 Enquiry.schema.methods.sendNotificationEmail = function(callback) {
-	var enquiry = this;
-
-	var recipientQuery = keystone.list('User').model.find();
-	if (this.enquiryType == 'committee')
-		recipientQuery = recipientQuery.where('committeeRole').ne('');
-	else
-		recipientQuery = recipientQuery.where('committeeRole', this.enquiryType);
-
-	recipientQuery.exec(function(err, recipients) {
-		if (err) return callback(err); 
-
-		new Email('enquiry-notification.pug', emailDefaults).send({
-			enquiry: enquiry
-		}, {
-			to: recipients,
-			from: {
-				name: 'JavaScript NZ',
-				email: 'contact@javascript.org.nz'
-			},
-			subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
-		}, callback)
-	});
+	new Email('enquiry-notification.pug', emailDefaults).send({
+		enquiry: enquiry
+	}, {
+		to: 'committee@javascript.org.nz',
+		from: {
+			name: 'JavaScript NZ',
+			email: 'contact@javascript.org.nz'
+		},
+		subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
+	}, callback)
 }
 
 Enquiry.defaultSort = '-createdAt';
