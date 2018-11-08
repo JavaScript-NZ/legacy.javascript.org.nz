@@ -1,6 +1,6 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Enquiry');
-var request = require('request');
+var superagent = require('superagent');
 
 exports = module.exports = function(req, res) {
 
@@ -35,10 +35,10 @@ exports = module.exports = function(req, res) {
 			 * Validate the recaptcha value that was passed back. Even if it fails we still provide a "success" message to the user. Only difference
 			 * is that the committee doesn't get spammed with rubbish.
 			 */
-			request(url, function (error, response, body) {
-				const parsedBody = JSON.parse(body);
-				console.log('Enquiry received. Recaptcha success result: ' + parsedBody.success); // Log for interests sake. Curious how much spam we stop
-				if (parsedBody.success === true) {
+			superagent.get(url)
+			.end(function (error, response, body) {
+				console.log('Enquiry received. Recaptcha success result: ' + response.body.success); // Log for interests sake. Curious how much spam we stop
+				if (response.body.success === true) {
 					newEnquiry.sendNotificationEmail();
 				}
 				locals.enquirySubmitted = true;

@@ -11,8 +11,8 @@
     "keystone-email": "^1.1.0",
     "nunjucks": "*",
     "pug": "^2.0.3",
-    "request": "^2.88.0",
     "stripe": "*",
+    "superagent": "^4.0.0-beta.5",
     "underscore": "*"
   },
   "devDependencies": {
