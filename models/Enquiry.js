@@ -1,3 +1,5 @@
+var Email = require('keystone-email');
+var emailDefaults = require('../src/defaults/email').emailDefaults;
 var keystone = require('keystone'),
 	Types = keystone.Field.Types;
 
@@ -42,18 +44,18 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 	recipientQuery.exec(function(err, recipients) {
 		if (err) return callback(err);
 
-		console.log(recipients);
+		console.log('About to send enquiry');
 
-		new keystone.Email('enquiry-notification').send({
+		new Email('enquiry-notification.pug', emailDefaults).send({
+			enquiry: enquiry
+		}, {
 			to: recipients,
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
 			subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
-			enquiry: enquiry
-		}, callback);
-
+		}, callback)
 	});
 }
 

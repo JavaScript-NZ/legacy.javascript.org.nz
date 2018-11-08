@@ -1,0 +1,15 @@
+extends layouts/base
+
+block content
+	h1 Hi #{user.name},
+
+	p Thanks for all your support towards the JavaScript Society of New Zealand. We're sad to see you go but appreciate the support you've provided.
+
+	p Your annual scubscription has been cancelled. If you decide that you would like to start your subscription up again at a later date then you can do so by #[a(href='http://javascript.org.nz/account/subscribe?userId=' + user.id) visiting our resubscribe page] or joining again #[a(href='http://javascript.org.nz/join')via our membership page].
+
+	p &nbsp;
+
+	p Regards,
+	p The JavaScript Society of New Zealand committee
+
+

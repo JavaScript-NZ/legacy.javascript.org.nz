@@ -1,3 +1,5 @@
+var Email = require('keystone-email');
+var emailDefaults = require('../src/defaults/email').emailDefaults;
 var keystone = require('keystone'),
 	Types = keystone.Field.Types;
 
@@ -50,24 +52,28 @@ User.schema.methods.sendMembershipEmail = function(callback) {
 	recipientQuery.exec(function(err) {
 		if (err) return callback(err);
 
-		new keystone.Email('membership-committee').send({
+		console.log('Sending committee email')
+		new Email('membership-committee', emailDefaults).send({
+			user: user
+		}, {
 			to: 'society@javascript.org.nz',
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'New JavaScript NZ member',
-			user: user
+			subject: 'New JavaScript NZ member'
 		}, callback);
 
-		new keystone.Email('membership-user').send({
+		console.log('Sending membership email')
+		new Email('membership-user', emailDefaults).send({
+			user: user
+		}, {
 			to: user.email,
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'Your JavaScript NZ membership',
-			user: user
+			subject: 'Your JavaScript NZ membership'
 		}, callback);
 	});
 }
@@ -81,13 +87,14 @@ User.schema.methods.sendCancellationEmail = function(callback) {
 	recipientQuery.exec(function(err) {
 		if (err) return callback(err);
 
-	new keystone.Email('cancellation-user').send({
+	new Email('cancellation-user', emailDefaults).send({
 			to: user.email,
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'Your JavaScript NZ membership cancellation',
+			subject: 'Your JavaScript NZ membership cancellation'
+		}, {
 			user: user
 		}, callback);
 	});

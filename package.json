@@ -7,8 +7,10 @@
     "consolidate": "*",
     "dotenv": "*",
     "jshint": "^2.9.5",
-    "keystone": "4.0.0-beta.5",
+    "keystone": "^4.0.0",
+    "keystone-email": "^1.1.0",
     "nunjucks": "*",
+    "pug": "^2.0.3",
     "stripe": "*",
     "underscore": "*"
   },
