@@ -42,9 +42,7 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 		recipientQuery = recipientQuery.where('committeeRole', this.enquiryType);
 
 	recipientQuery.exec(function(err, recipients) {
-		if (err) return callback(err);
-
-		console.log('About to send enquiry');
+		if (err) return callback(err); 
 
 		new Email('enquiry-notification.pug', emailDefaults).send({
 			enquiry: enquiry
