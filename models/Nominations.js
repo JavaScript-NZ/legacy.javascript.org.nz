@@ -1,3 +1,5 @@
+var Email = require('keystone-email');
+var emailDefaults = require('../src/defaults/email').emailDefaults;
 var keystone = require('keystone'),
 	Types = keystone.Field.Types;
 
@@ -37,14 +39,15 @@ Nomination.schema.methods.sendCommitteeNominationEmail = function(callback) {
 	recipientQuery.exec(function(err) {
 		if (err) return callback(err);
 
-		new keystone.Email('new-award').send({
+		new Email('new-award.pug',emailDefaults).send({
+			nomination: nomination,
+		}, {
 			to: 'awards@javascript.org.nz',
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
-			subject: 'A new nomination for ' + nomination.award,
-			nomination: nomination
+			subject: 'A new nomination for ' + nomination.award
 		}, callback);
 	});
 };

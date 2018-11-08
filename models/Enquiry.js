@@ -1,3 +1,5 @@
+var Email = require('keystone-email');
+var emailDefaults = require('../src/defaults/email').emailDefaults;
 var keystone = require('keystone'),
 	Types = keystone.Field.Types;
 
@@ -40,23 +42,18 @@ Enquiry.schema.methods.sendNotificationEmail = function(callback) {
 		recipientQuery = recipientQuery.where('committeeRole', this.enquiryType);
 
 	recipientQuery.exec(function(err, recipients) {
-		if (err) return callback(err);
+		if (err) return callback(err); 
 
-		// console.log(recipients);
-
-		new keystone.Email('enquiry-notification').send({
-			// Just hard code this to the society email address for the moment. Something is up with the Keystone
-			// query
-			to: 'society@javascript.org.nz',
-			// to: recipients,
+		new Email('enquiry-notification.pug', emailDefaults).send({
+			enquiry: enquiry
+		}, {
+			to: recipients,
 			from: {
 				name: 'JavaScript NZ',
 				email: 'contact@javascript.org.nz'
 			},
 			subject: 'JavaScript NZ website enquiry for ' + enquiry.enquiryType,
-			enquiry: enquiry
-		}, callback);
-
+		}, callback)
 	});
 }
 

@@ -1,4 +1,4 @@
-{% extends "templates/layouts/default.html" %}
+{% extends 'layouts/default.html' %}
 
 {% block intro %}
 	<div class="ui center aligned header">
@@ -40,7 +40,7 @@
 
 			<div class="twelve wide column">
 				<div id="doc">
-					{{ document.content }}
+					{{ document.content | safe }}
 				</div>
 			</div>
 		</div>

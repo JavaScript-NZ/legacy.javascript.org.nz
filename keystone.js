@@ -24,7 +24,7 @@ keystone.init({
 	'less': 'public',
 	'static': 'public',
 	'favicon': 'public/favicon.ico',
-	'views': 'templates/views',
+	'views': ['templates', 'templates/views'],
 	'view engine': 'html',
 	'custom engine': cons.nunjucks,
 
