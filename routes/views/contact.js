@@ -1,5 +1,6 @@
 var keystone = require('keystone'),
 	Enquiry = keystone.list('Enquiry');
+var request = require('request');
 
 exports = module.exports = function(req, res) {
 
@@ -26,11 +27,23 @@ exports = module.exports = function(req, res) {
 		}, function(err) {
 			if (err) {
 				locals.validationErrors = err.errors;
-			} else {
-				locals.enquirySubmitted = true;
-				newEnquiry.sendNotificationEmail();
+				return next();
 			}
-			next();
+
+			const url = 'https://www.google.com/recaptcha/api/siteverify?secret=' + process.env.RECAPTCHA_SECRET+ '&response=' + req.body.recaptcha + '&remoteip=' + req.connection.remoteAddress;
+			/**
+			 * Validate the recaptcha value that was passed back. Even if it fails we still provide a "success" message to the user. Only difference
+			 * is that the committee doesn't get spammed with rubbish.
+			 */
+			request(url, function (error, response, body) {
+				const parsedBody = JSON.parse(body);
+				console.log('Enquiry received. Recaptcha success result: ' + parsedBody.success); // Log for interests sake. Curious how much spam we stop
+				if (parsedBody.success === true) {
+					newEnquiry.sendNotificationEmail();
+				}
+				locals.enquirySubmitted = true;
+				next();
+			});
 		});
 
 	});
