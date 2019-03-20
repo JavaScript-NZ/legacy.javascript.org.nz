@@ -1,0 +1,65 @@
+{% extends 'layouts/default.html' %}
+
+{% block intro %}
+	<div class="ui center aligned header">
+		<h1 class="ui icon header">
+			<i class="users icon"></i>
+			<div class="content">Join the JavaScript New Zealand Slack</div>
+		</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="main container">
+		{% if joinSubmitted %}
+			<div class="ui form segment">
+				<h3>Thanks for signing up for the JavaScript New Zealand Slack</h3>
+				<p>you'll recieve an email soon (with 24 hours we hope) with details of how to access the slack.</p>
+				<p>If you don't recieve anything, please don't hesitate to contact society@javascript.org.nz to follow up.</p>
+			</div>
+		{% else %}
+			<form method="post" class="ui form segment">
+				<input type="hidden" name="action" value="slack">
+
+				{% set class = ( "error" if validationErrors.name else "" ) %}
+				<div class="required field {{ class }}">
+					<label for="joinName">Name</label>
+					<input id="joinName" type="text" name="name" value="{{ formData["name"] }}"/>
+				</div>
+
+				{% set class = ( "error" if validationErrors.email else "" ) %}
+				<div class="required field {{ class }}">
+						<label for="joinEmail">Email</label>
+						<input id="joinEmail" type="email" name="email" value="{{ formData["email"] }}"/>
+				</div>
+				<div class="field {{ class }}">
+						<label for="joinAbout">About you:</label>
+						<textarea id="joinAbout" type="textarea" name="about" value="">{{ formData["about"] }}</textarea>
+				</div>
+				{% set class = ( "error" if validationErrors.agreeConduct else "" ) %}
+				{% set checked = ( "checked" if formData["agreeConduct"] else "" ) %}
+				<div class="field {{ class }}">
+					<div class="ui toggle checkbox">
+						<input id="joinConduct" type="checkbox" name="agreeConduct" {{ checked }}>
+						<label>I agree</label>
+					</div>
+					<span class="supplementary-label">to the <a href="/conduct">JavaScript NZ Code of Conduct</a></span>
+				</div>
+
+				<div class="field">
+					<button class="ui green button" type="submit">Apply for Access</button>
+				</div>
+				<p>
+				Alternatively you can email society@javascript.org.nz to request access to the Slack Channel.
+				</p>
+
+			</form>
+
+
+		{% endif %}
+	</div>
+{% endblock %}
+
+{% block js %}
+	<script>$('.ui.dropdown').dropdown(); $('.ui.checkbox').checkbox();</script>
+{% endblock %}

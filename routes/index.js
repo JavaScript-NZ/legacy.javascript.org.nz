@@ -18,41 +18,39 @@
  * http://expressjs.com/api.html#app.VERB
  */
 
-var _ = require('underscore'),
-	keystone = require('keystone'),
-	middleware = require('./middleware'),
+var _ = require("underscore"),
+	keystone = require("keystone"),
+	middleware = require("./middleware"),
 	importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
-keystone.pre('routes', middleware.initLocals);
-keystone.pre('routes', middleware.initErrorHandlers);
-keystone.pre('routes', middleware.checkMaintenance);
-keystone.pre('render', middleware.flashMessages);
+keystone.pre("routes", middleware.initLocals);
+keystone.pre("routes", middleware.initErrorHandlers);
+keystone.pre("routes", middleware.checkMaintenance);
+keystone.pre("render", middleware.flashMessages);
 
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+	views: importRoutes("./views")
 };
 
 // Setup Route Bindings
 exports = module.exports = function(app) {
-
 	// Views
-	app.get('/', routes.views.index);
-	app.get('/blog/:category?', routes.views.blog);
-	app.get('/blog/post/:post', routes.views.post);
-	app.get('/gallery', routes.views.gallery);
-  app.all('/rules', routes.views.document);
-  app.all('/conduct', routes.views.document);
-	app.all('/conduct/reports', routes.views.document);
-  app.all('/contact', routes.views.contact);
-  app.all('/join', routes.views.join);
-	app.all('/awards', routes.views.awards);
-	app.all('/help', routes.views.help);
-	app.all('/account/subscribe', routes.views.stripe.subscribe);
-	app.all('/account/cancel', routes.views.stripe.cancel);
-
+	app.get("/", routes.views.index);
+	app.get("/blog/:category?", routes.views.blog);
+	app.get("/blog/post/:post", routes.views.post);
+	app.get("/gallery", routes.views.gallery);
+	app.all("/rules", routes.views.document);
+	app.all("/conduct", routes.views.document);
+	app.all("/conduct/reports", routes.views.document);
+	app.all("/contact", routes.views.contact);
+	app.all("/join", routes.views.join);
+	app.all("/awards", routes.views.awards);
+	app.all("/help", routes.views.help);
+	app.all("/account/subscribe", routes.views.stripe.subscribe);
+	app.all("/account/cancel", routes.views.stripe.cancel);
+	app.all("/slack", routes.views.slack);
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
-
 };
