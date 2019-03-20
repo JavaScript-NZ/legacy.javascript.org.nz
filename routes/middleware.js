@@ -8,10 +8,9 @@
  * modules in your project's /lib directory.
  */
 
-var _ = require('underscore'),
-	querystring = require('querystring'),
-	keystone = require('keystone');
-
+var _ = require("underscore"),
+	querystring = require("querystring"),
+	keystone = require("keystone");
 
 /**
 	Initialises the standard view locals
@@ -27,10 +26,11 @@ exports.initLocals = function(req, res, next) {
 	locals.navLinks = [
 		/*{ label: 'Blog',		key: 'blog',		href: '/blog' },
 		{ label: 'Gallery',		key: 'gallery',		href: '/gallery' },*/
-		{ label: 'JSNZ 2017 Awards',		key: 'awards',		href: '/awards' },
-    { label: 'Rules',		key: 'rules',		href: '/rules' },
-    { label: 'Code of Conduct',		key: 'conduct',		href: '/conduct' },
-    { label: 'Contact',		key: 'contact',		href: '/contact' }
+		{ label: "JSNZ 2017 Awards", key: "awards", href: "/awards" },
+		{ label: "Slack", key: "slack", href: "/slack" },
+		{ label: "Rules", key: "rules", href: "/rules" },
+		{ label: "Code of Conduct", key: "conduct", href: "/conduct" },
+		{ label: "Contact", key: "contact", href: "/contact" }
 	];
 
 	locals.user = req.user;
@@ -38,42 +38,40 @@ exports.initLocals = function(req, res, next) {
 	next();
 };
 
-
 /**
 	Inits the error handler functions into `req`
 */
 
 exports.initErrorHandlers = function(req, res, next) {
 	res.err = function(err) {
-		console.log('ERROR!', err);
-		res.status(500).render('errors/500', {
+		console.log("ERROR!", err);
+		res.status(500).render("errors/500", {
 			error: err
 		});
 	};
 
 	res.notFound = function() {
-		res.status(404).render('errors/404');
+		res.status(404).render("errors/404");
 	};
 
 	next();
 };
 
 exports.checkMaintenance = function(req, res, next) {
-  var maintenance = res.locals.maintenance = {
-    enabled: process.env.MAINTENANCE_ENABLED == 'true',
-    msg: process.env.MAINTENANCE_MSG,
-    canBypass: (!!req.user) && req.user.isAdmin,
-  };
-  maintenance.show = maintenance.enabled && !maintenance.canBypass;
+	var maintenance = (res.locals.maintenance = {
+		enabled: process.env.MAINTENANCE_ENABLED == "true",
+		msg: process.env.MAINTENANCE_MSG,
+		canBypass: !!req.user && req.user.isAdmin
+	});
+	maintenance.show = maintenance.enabled && !maintenance.canBypass;
 
-  if (maintenance.show && !req.path.match(/\/keystone/)) {
-    res.render('errors/maintenance');
-    return;
-  }
+	if (maintenance.show && !req.path.match(/\/keystone/)) {
+		res.render("errors/maintenance");
+		return;
+	}
 
-  next();
+	next();
 };
-
 
 /**
 	Fetches and clears the flashMessages before a view is rendered
@@ -81,17 +79,20 @@ exports.checkMaintenance = function(req, res, next) {
 
 exports.flashMessages = function(req, res, next) {
 	var flashMessages = {
-		info: req.flash('info'),
-		success: req.flash('success'),
-		warning: req.flash('warning'),
-		error: req.flash('error')
+		info: req.flash("info"),
+		success: req.flash("success"),
+		warning: req.flash("warning"),
+		error: req.flash("error")
 	};
 
-	res.locals.messages = _.any(flashMessages, function(msgs) { return msgs.length; }) ? flashMessages : false;
+	res.locals.messages = _.any(flashMessages, function(msgs) {
+		return msgs.length;
+	})
+		? flashMessages
+		: false;
 
 	next();
 };
-
 
 /**
 	Prevents people from accessing protected pages when they're not signed in
@@ -99,8 +100,8 @@ exports.flashMessages = function(req, res, next) {
 
 exports.requireUser = function(req, res, next) {
 	if (!req.user) {
-		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/keystone/signin');
+		req.flash("error", "Please sign in to access this page.");
+		res.redirect("/keystone/signin");
 	} else {
 		next();
 	}
