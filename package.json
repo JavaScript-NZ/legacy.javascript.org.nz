@@ -3,23 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "async": "*",
+    "async": "^2.6.2",
     "consolidate": "*",
-    "dotenv": "*",
-    "jshint": "^2.9.5",
+    "cookiejar": "^2.1.2",
+    "dotenv": "^7.0.0",
+    "jshint": "^2.10.2",
     "keystone": "^4.0.0",
     "keystone-email": "^1.1.0",
-    "nunjucks": "*",
+    "nunjucks": "^3.2.0",
     "pug": "^2.0.3",
-    "stripe": "*",
-    "superagent": "^4.0.0-beta.5",
+    "stripe": "^6.28.0",
+    "superagent": "^4.1.0",
     "underscore": "*"
   },
   "devDependencies": {
-    "gulp": "*",
+    "gulp": "^4.0.0",
     "gulp-jshint": "*",
-    "jshint-stylish": "*",
-    "gulp-watch": "*"
+    "gulp-watch": "*",
+    "jshint-stylish": "*"
   },
   "engines": {
     "node": "8.1.3",
