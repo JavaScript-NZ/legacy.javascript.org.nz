@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^2.6.4",
     "consolidate": "*",
     "cookiejar": "^2.1.2",
     "dotenv": "^7.0.0",
